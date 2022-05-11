@@ -3,6 +3,12 @@
 // const fruits = ["사과", "바나나", "파인애플"];
 // console.log(fruits);
 
+// const fruits = [];
+// fruits.push("사과")
+// fruits.push("바나나")
+// fruits.push("파인애플")
+// console.log(fruits)
+
 
 // 주어진 fruits 배열에서 마지막 요소를 꺼내 newFruits에 넣어주세요.
 
@@ -10,6 +16,14 @@
 // const newFruits = fruits[fruits.length-1]
 // console.log(newFruits);
 
+// 직접적으로 인덱스에 할당하느 방법은 매우 안좋은 방법이다.
+// const arr = [];
+// arr[0] = 1;
+// arr[1] = 2;
+// arr[100] = 20;
+
+// console.log(arr)
+//
 
 // 학생들의 이름이 담긴 students 배열이 있습니다.
 // 배열에서 2번 째 요소까지의 데이터들을 뽑아 새로운 배열을 만드세요.
@@ -36,6 +50,25 @@
 // arr.push(number.slice(3,7))
 // arr.push(number.slice(7,12))
 // console.log(arr);
+
+
+//객체 value 가져오는 두가지 방법 확실히 구분
+// const obj = {
+//   "name" : "철수",
+//   "age" : "12",
+//   "school" :{
+//     "name" : "다람쥐 초등학교"
+//   }
+// }
+
+// let str = "name"
+// obj.name
+// obj[str]
+
+// let str = "age";
+// obj.age
+// obj[str]
+// obj.school
 
 
 // 주어진 student 객체에
