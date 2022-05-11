@@ -10,7 +10,10 @@ const MyInput = styled.input`
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #BDBDBD;
+
+    &::placeholder{
+        color: #BDBDBD;  
+    }
 `
 //가로 정렬
 const MyRow = styled.div`
@@ -29,6 +32,9 @@ export const Body = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
 `;
 export const Title = styled.h1`
     font-family: 'Noto Sans CJK KR';
@@ -139,11 +145,15 @@ export const Enroll = styled.button`
     width: 180px;
     height: 52px;
     background: #FFD600;
-
+    border: none;
     font-family: 'Noto Sans CJK KR';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     text-align: center;
+`;
+export const ErrorBox = styled.div`
+    color: red;
+    margin-left: 10px;
 `;
