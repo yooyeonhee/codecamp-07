@@ -65,3 +65,25 @@
 //   }
 // }
 // days(8)
+
+
+/* 추가 학습 */
+
+//switch 사용
+//break로 꼭 멈춰주기
+//case에 없는 값이 들어올 경우 default 값을 사용
+
+// const day = "월요일";
+// switch( day ){
+//   case "월요일":
+//     console.log("월요일은 일하기 싫어.")
+//     break
+//   case "화요일":
+//     console.log("화요일도 일하기 싫어")
+//     break
+//   case "수요일":
+//     console.log("수요일은 술이나 먹고")
+//     break
+//   default :
+//      console.log("오늘은" + day + "입니다.")
+// }
