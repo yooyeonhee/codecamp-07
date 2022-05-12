@@ -13,11 +13,17 @@ export default function MyPage(){
     const [addressError, setAddressError] = useState("")
 
     function onChangeName(event){
+        //if (event.target.value !==""){
+            //setNameError("")
+        //}
         // event.targe => 태그 전체를 의미, ex)<input type "text"/>
         // event.target.value => 태그에 입력된 값!!
         setName(event.target.value)
     }
     function onChangePassword(event){
+        //if (event.target.value !==""){
+            //setNameError("")
+        //}
         // event.targe => 태그 전체를 의미, ex)<input type "text"/>
         // event.target.value => 태그에 입력된 값!!
         setPassword(event.target.value)
@@ -33,7 +39,7 @@ export default function MyPage(){
         setAddress(event.target.value)
     }
 
-    function onClickSignup(){
+    function onClickSubmit(){
         if(name === ""){
             setNameError("이름을 적어주세요.")
         }
@@ -126,7 +132,7 @@ export default function MyPage(){
                     <ChooseMain type="radio" name="main"/> 사진
                 </ChooseDiv>
             </ChildDiv>
-            <Enroll onClick={onClickSignup}>등록하기</Enroll>
+            <Enroll onClick={onClickSubmit}>등록하기</Enroll>
         </Body>
     )
 }
