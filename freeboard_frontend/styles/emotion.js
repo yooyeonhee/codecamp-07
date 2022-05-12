@@ -81,7 +81,10 @@ export const BoardInput = styled.textarea`
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #BDBDBD;
+    resize: none;
+    &::placeholder{
+        color: #BDBDBD;  
+    }
 `;
 export const PostNum = styled.span`
     height: 52px;

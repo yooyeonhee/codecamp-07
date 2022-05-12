@@ -1,45 +1,61 @@
-import { Body, Title, ParentIdDiv, IdInput, TitleInput, IdDiv, ParentDiv, ChildDiv, SubTitle, BoardInput, PostNum, PostInput, SearchPost, UpLoad, Plus, YoutubeInput, PlusIcon, PlusUpload, ChooseDiv, ChooseMain, Enroll,ErrorBox} from '../../../styles/index';
+import { Body, Title, ParentIdDiv, IdInput, TitleInput, IdDiv, ParentDiv, ChildDiv, SubTitle, BoardInput, PostNum, PostInput, SearchPost, UpLoad, Plus, YoutubeInput, PlusIcon, PlusUpload, ChooseDiv, ChooseMain, Enroll,ErrorBox} from '../../../styles/emotion';
 import { useState } from 'react'
+import { useMutation, gql } from '@apollo/client'
 
+const CREATE_BOARD = gql
+`
+mutation createBoard($createBoardInput:CreateBoardInput!){
+    createBoard(createBoardInput:$createBoardInput)
+  {
+    _id
+    title
+    contents
+  }
+}
+`
 
 export default function MyPage(){
+    const [data, setData] = useState("")
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
-    const [address, setAddress] = useState("")
+    const [contents, setContents] = useState("")
     const [nameError, setNameError] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [titleError, setTitleError] = useState("")
-    const [addressError, setAddressError] = useState("")
+    const [contentsError, setContentsError] = useState("")
+    const[callGraphql] = useMutation(CREATE_BOARD)
 
     function onChangeName(event){
-        //if (event.target.value !==""){
-            //setNameError("")
-        //}
-        // event.targe => 태그 전체를 의미, ex)<input type "text"/>
-        // event.target.value => 태그에 입력된 값!!
         setName(event.target.value)
     }
     function onChangePassword(event){
-        //if (event.target.value !==""){
-            //setNameError("")
-        //}
-        // event.targe => 태그 전체를 의미, ex)<input type "text"/>
-        // event.target.value => 태그에 입력된 값!!
         setPassword(event.target.value)
     }
     function onChangeTitle(event){
-        // event.targe => 태그 전체를 의미, ex)<input type "text"/>
-        // event.target.value => 태그에 입력된 값!!
         setTitle(event.target.value)
     }
-    function onChangeAddress(event){
-        // event.targe => 태그 전체를 의미, ex)<input type "text"/>
-        // event.target.value => 태그에 입력된 값!!
-        setAddress(event.target.value)
+    function onChangeContents(event){
+        setContents(event.target.value)
+    }
+    //정보 저장 api 함수
+    const onClickGraphqlApi = async() => {
+        const result = await callGraphql({
+            variables: {
+                createBoardInput: {
+                    writer: name,
+                    password: password,
+                    title: title,
+                    contents:contents
+                }
+            }
+        })
+        console.log(result)
+        setData(result.data.createBoard._id)
     }
 
     function onClickSubmit(){
+        //입력사항 오류 메시지 알림
         if(name === ""){
             setNameError("이름을 적어주세요.")
         }
@@ -58,11 +74,15 @@ export default function MyPage(){
         else{
             setTitleError("")
         }
-        if(address === ""){
-            setAddressError("상세주소는 필수 입력사항 입니다.")
+        if(contents === ""){
+            setContentsError("내용은 필수 입력사항 입니다.")
         }
         else{
-            setAddressError("")
+            setContentsError("")
+        }
+        if(name!==""&&password!==""&&title!==""&&contents!==""){
+            onClickGraphqlApi()
+            alert("게시물이 저장되었습니다.")
         }
         
     }
@@ -91,8 +111,9 @@ export default function MyPage(){
             </ChildDiv>
             <ChildDiv>
                 <SubTitle>내용</SubTitle>
-                <BoardInput type="text" placeholder="내용을 작성해주세요.">
+                <BoardInput type="text" onChange={onChangeContents} placeholder="내용을 작성해주세요.">
                 </BoardInput>
+                <ErrorBox>{contentsError}</ErrorBox>
             </ChildDiv>
             <ChildDiv>
                 <SubTitle>주소</SubTitle>
@@ -101,8 +122,7 @@ export default function MyPage(){
                     <SearchPost>우편번호 검색</SearchPost>
                 </ParentDiv>
                 <PostInput type="text"></PostInput>
-                <PostInput type="text" onChange={onChangeAddress} placeholder="상세 주소를 입력해주세요."></PostInput>
-                <ErrorBox>{addressError}</ErrorBox>
+                <PostInput type="text" placeholder="상세 주소를 입력해주세요."></PostInput>
             </ChildDiv>
             <ChildDiv>
                 <SubTitle>유튜브</SubTitle>
@@ -133,6 +153,7 @@ export default function MyPage(){
                 </ChooseDiv>
             </ChildDiv>
             <Enroll onClick={onClickSubmit}>등록하기</Enroll>
+
         </Body>
     )
 }
