@@ -143,6 +143,12 @@ export const ChooseDiv = styled(MyRow)``;
 export const ChooseMain = styled.input`
     margin-right: 5px;
 `;
+export const ChooseLabel = styled.label`
+    margin-left: 8px;
+    margin-right: 20px;
+    font-weight: 500;
+    cursor: pointer;
+`
 
 export const Enroll = styled.button`
     width: 180px;

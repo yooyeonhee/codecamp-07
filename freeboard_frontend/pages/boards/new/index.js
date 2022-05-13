@@ -1,4 +1,4 @@
-import { Body, Title, ParentIdDiv, IdInput, TitleInput, IdDiv, ParentDiv, ChildDiv, SubTitle, BoardInput, PostNum, PostInput, SearchPost, UpLoad, Plus, YoutubeInput, PlusIcon, PlusUpload, ChooseDiv, ChooseMain, Enroll,ErrorBox} from '../../../styles/emotion';
+import { Body, Title, ParentIdDiv, IdInput, TitleInput, IdDiv, ParentDiv, ChildDiv, SubTitle, BoardInput, PostNum, PostInput, SearchPost, UpLoad, Plus, YoutubeInput, PlusIcon, PlusUpload, ChooseDiv, ChooseMain,ChooseLabel, Enroll,ErrorBox} from '../../../styles/emotion';
 import { useState } from 'react'
 import { useMutation, gql } from '@apollo/client'
 
@@ -48,6 +48,13 @@ export default function MyPage(){
                     title: title,
                     contents:contents
                 }
+                //만일 객체의 키와 값이 같으면 하나만 써도 된다. shorthand property
+                // createBoardInput: {
+                //     writer
+                //     password
+                //     title
+                //     contents
+                // }
             }
         })
         console.log(result)
@@ -148,8 +155,8 @@ export default function MyPage(){
             <ChildDiv>
                 <SubTitle>메인 설정</SubTitle>
                 <ChooseDiv>
-                    <ChooseMain type="radio" name="main"/> 유튜브
-                    <ChooseMain type="radio" name="main"/> 사진
+                    <ChooseMain type="radio" name="main"/> <ChooseLabel>유튜브</ChooseLabel>
+                    <ChooseMain type="radio" name="main"/> <ChooseLabel>사진</ChooseLabel>
                 </ChooseDiv>
             </ChildDiv>
             <Enroll onClick={onClickSubmit}>등록하기</Enroll>
