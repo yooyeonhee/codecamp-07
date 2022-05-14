@@ -1,6 +1,7 @@
-import { Body, Title, ParentIdDiv, IdInput, TitleInput, IdDiv, ParentDiv, ChildDiv, SubTitle, BoardInput, PostNum, PostInput, SearchPost, UpLoad, Plus, YoutubeInput, PlusIcon, PlusUpload, ChooseDiv, ChooseMain,ChooseLabel, Enroll,ErrorBox} from '../../../styles/emotion';
+import { Body, Title, ParentIdDiv, IdInput, TitleInput, IdDiv, ParentDiv, ChildDiv, SubTitle, BoardInput, PostNum, PostInput, SearchPost, UpLoad, Plus, YoutubeInput, PlusIcon, PlusUpload, ChooseDiv, ChooseMain,ChooseLabel, Enroll,ErrorBox} from '../../../styles/emotion_new';
 import { useState } from 'react'
 import { useMutation, gql } from '@apollo/client'
+import { useRouter } from 'next/router'
 
 const CREATE_BOARD = gql
 `
@@ -15,7 +16,8 @@ mutation createBoard($createBoardInput:CreateBoardInput!){
 `
 
 export default function MyPage(){
-    const [data, setData] = useState("")
+    const router = useRouter()
+    // const [data, setData] = useState("")
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
@@ -26,42 +28,19 @@ export default function MyPage(){
     const [contentsError, setContentsError] = useState("")
     const[callGraphql] = useMutation(CREATE_BOARD)
 
-    function onChangeName(event){
+    const onChangeName = (event) => {
         setName(event.target.value)
     }
-    function onChangePassword(event){
+    const onChangePassword = (event) => {
         setPassword(event.target.value)
     }
-    function onChangeTitle(event){
+    const onChangeTitle = (event) => {
         setTitle(event.target.value)
     }
-    function onChangeContents(event){
+    const onChangeContents = (event) =>{
         setContents(event.target.value)
     }
-    //정보 저장 api 함수
-    const onClickGraphqlApi = async() => {
-        const result = await callGraphql({
-            variables: {
-                createBoardInput: {
-                    writer: name,
-                    password: password,
-                    title: title,
-                    contents:contents
-                }
-                //만일 객체의 키와 값이 같으면 하나만 써도 된다. shorthand property
-                // createBoardInput: {
-                //     writer
-                //     password
-                //     title
-                //     contents
-                // }
-            }
-        })
-        console.log(result)
-        setData(result.data.createBoard._id)
-    }
-
-    function onClickSubmit(){
+    const onClickSubmit = async() => {
         //입력사항 오류 메시지 알림
         if(name === ""){
             setNameError("이름을 적어주세요.")
@@ -88,10 +67,34 @@ export default function MyPage(){
             setContentsError("")
         }
         if(name!==""&&password!==""&&title!==""&&contents!==""){
-            onClickGraphqlApi()
-            alert("게시물이 저장되었습니다.")
+            try{
+                //정보 저장 api 함수
+                const result = await callGraphql({
+                    variables: {
+                        createBoardInput: {
+                            writer: name,
+                            password: password,
+                            title: title,
+                            contents:contents
+                        }
+                        //만일 객체의 키와 값이 같으면 하나만 써도 된다. shorthand property
+                        // createBoardInput: {
+                        //     writer
+                        //     password
+                        //     title
+                        //     contents
+                        // }
+                    }
+                })
+                console.log(result)
+                router.push(`/boards/detail/${result.data.createBoard._id}`)
+                // setData(result.data.createBoard._id)
+            }
+            catch(error){
+                console.log(error)
+                alert(error.message) //백엔드 개발자가 만든 error 메시지를 보여줌
+            }
         }
-        
     }
     return(
         <Body>

@@ -37,29 +37,26 @@ export default function DynamicRoutingPage() {
     const onClickSave = async() => {
         if(seller !== "" && name !== "" && detail !== "" && price !== ""){
             try{
-            const result = await callGraphql({
-                variables: {
-                    seller :seller,
-                    createProductInput :{
-                        name: name,
-                        detail:detail,
-                        price:Number(price)
-                    }
-                },
-              })
-              console.log(result);
-            //   alert("게시글이 등록되었습니다.");
-            router.push(`/quiz/05-02-dynamic-routed/${result.data.createProduct._id}`)
+                const result = await callGraphql({
+                    variables: {
+                        seller :seller,
+                        createProductInput :{
+                            name: name,
+                            detail:detail,
+                            price:Number(price)
+                        }
+                    },
+                })
+                console.log(result);
+                //   alert("게시글이 등록되었습니다.");
+                router.push(`/quiz/05-02-dynamic-routed/${result.data.createProduct._id}`)
             }
             catch(error){
                 console.log(error)
                 alert(error.message) //백엔드 개발자가 만든 error 메시지를 보여줌
-    
             }
         }
     }
-
-
     return(
         <>
             판매자 : <input type="text" onChange={onChangeSeller}/>
