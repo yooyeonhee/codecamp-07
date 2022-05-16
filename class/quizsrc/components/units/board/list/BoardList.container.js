@@ -1,6 +1,7 @@
 import {useRouter} from 'next/router'
+import BoardListUI from './BoardList.presenter'
 
-export default function DynamicRoutingPage() {
+export default function BoardListRouting() {
     const router = useRouter()
 
     const onClickMove1 = () => {
@@ -14,10 +15,10 @@ export default function DynamicRoutingPage() {
     }
 
     return (
-        <> 
-        <button onClick={onClickMove1}>4게시글 이동하기</button>
-        <button onClick={onClickMove2}>5게시글 이동하기</button>
-        <button onClick={onClickMove3}>28게시글 이동하기</button>
-        </>
+        <BoardListUI
+            onClickMove1={onClickMove1}
+            onClickMove2={onClickMove2}
+            onClickMove3={onClickMove3}
+        /> 
     )
 }

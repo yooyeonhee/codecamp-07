@@ -37,7 +37,7 @@ export default function GraphqlMutationPage(){
             })
             console.log(result)
             // setData(result.data.createBoard.message)
-            router.push(`/05-06-dynamic-routed-board/${result.data.createBoard.number}`)
+            router.push(`/quiz/06-02-container-presenter/${result.data.createBoard.number}`)
 
         } catch(error){
             console.log(error)
@@ -63,7 +63,6 @@ export default function GraphqlMutationPage(){
             작성자 : <input type="text" onChange={onChangeName}/>
             제목 : <input type="text" onChange={onChangeTitle}/>
             내용 : <input type="text" onChange={onChangeContents}/>
-            <div>{data}</div>
             <button onClick={handleClickGraphqlApi}>Rest-Api 요청하기!</button>
         </div>
     )
