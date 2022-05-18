@@ -1,4 +1,5 @@
 import * as S from "./BoardDetail.styles"
+import { getDate } from "../../../../commons/libraries/utils"
 
 export default function BoardDetailUI(props){
 
@@ -14,7 +15,7 @@ export default function BoardDetailUI(props){
                                 </S.ProfileImg>
                                 <S.InfoWrapper>
                                     <S.InfoWriter>{props.data? props.data.fetchBoard.writer : "loading"}</S.InfoWriter>
-                                    <S.InfoCreate>Date : {props.data? props.data.fetchBoard.createdAt : "loading"}</S.InfoCreate>
+                                    <S.InfoCreate>Date : {getDate(props.data? props.data.fetchBoard.createdAt : "loading")}</S.InfoCreate>
                                 </S.InfoWrapper>
                             </S.BoardInfo>
                             <S.BoardFunction>

@@ -7,7 +7,7 @@ export default function BoardWriteUI(props){
             <Title>게시물 등록</Title>
             <ParentIdDiv>
                 <IdDiv>
-                    <SubTitle>작성자</SubTitle>
+                    <SubTitle aaa="blue">작성자</SubTitle>
                     <IdInput type="text" onChange={props.onChangeName} placeholder="이름을 적어주세요.">
                     </IdInput>
                     <ErrorBox>{props.nameError}</ErrorBox>
@@ -68,7 +68,7 @@ export default function BoardWriteUI(props){
                     <ChooseMain type="radio" name="main"/> <ChooseLabel>사진</ChooseLabel>
                 </ChooseDiv>
             </ChildDiv>
-            <Enroll disabled={props.name&&props.password&&props.title&&props.contents ? false : true}onClick={props.onClickSubmit}>등록하기</Enroll>
+            <Enroll isActive={props.isActive}onClick={props.onClickSubmit}>등록하기</Enroll>
 
         </Body>
     )

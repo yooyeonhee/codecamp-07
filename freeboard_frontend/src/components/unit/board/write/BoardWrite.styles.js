@@ -61,10 +61,12 @@ export const ChildDiv = styled.div`
 `;
 export const SubTitle= styled.h3`
     /* font-family: 'Noto Sans CJK KR'; */
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 24px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    color : ${(props) => props.aaa}
 `;
 export const IdInput = styled(MyInput)`
     width: 100%;
@@ -153,7 +155,6 @@ export const ChooseLabel = styled.label`
 export const Enroll = styled.button`
     width: 180px;
     height: 52px;
-    background:#FFD600;
     border: none;
     font-family: 'Noto Sans CJK KR';
     font-style: normal;
@@ -161,9 +162,7 @@ export const Enroll = styled.button`
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    &:disabled{
-    background: #ccc; 
-}
+    background-color: ${(props)=>props.isActive ? "yellow" : "default"};
 `;
 export const ErrorBox = styled.div`
     color: red;

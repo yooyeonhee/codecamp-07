@@ -8,6 +8,7 @@ import {CREATE_BOARD} from './BoardWrite.queries'
 export default function BoardWriteFunction(){
     const router = useRouter()
     // const [data, setData] = useState("")
+    const [isActive, setIsActive] = useState(false)
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
@@ -20,15 +21,51 @@ export default function BoardWriteFunction(){
 
     const onChangeName = (event) => {
         setName(event.target.value)
+        if(event.target.value !==""){
+            setNameError("")
+        }
+        if(event.target.value && password && title && contents){
+            setIsActive(true);
+        }
+        else{
+            setIsActive(false)
+        }
     }
     const onChangePassword = (event) => {
         setPassword(event.target.value)
+        if(event.target.value !==""){
+            setPasswordError("")
+        }
+        if(name && event.target.value && title && contents){
+            setIsActive(true);
+        }
+        else{
+            setIsActive(false)
+        }
     }
     const onChangeTitle = (event) => {
         setTitle(event.target.value)
+        if(event.target.value !==""){
+            setTitleError("")
+        }
+        if(name && password && event.target.value && contents){
+            setIsActive(true);
+        }
+        else{
+            setIsActive(false)
+        }
     }
     const onChangeContents = (event) =>{
         setContents(event.target.value)
+        if(event.target.value !==""){
+            setContentsError("")
+        }
+        if(name && password && title &&event.target.value){
+            setIsActive(true);
+        }
+        else{
+            setIsActive(false)
+        }
     }
 
     const onClickSubmit = async() => {
@@ -38,26 +75,14 @@ export default function BoardWriteFunction(){
         if(!name){
             setNameError("이름을 적어주세요.")
         }
-        else{
-            setNameError("")
-        }
         if(!password){
             setPasswordError("비밀번호를 적어주세요.")
-        }
-        else{
-            setPasswordError("")
         }
         if(!title){
             setTitleError("제목을 적어주세요.")
         }
-        else{
-            setTitleError("")
-        }
         if(!contents){
             setContentsError("내용은 필수 입력사항 입니다.")
-        }
-        else{
-            setContentsError("")
         }
 
 
@@ -76,7 +101,7 @@ export default function BoardWriteFunction(){
                     }
                 })
                 // console.log(result)
-                router.push(`/boards/detail/${result.data.createBoard._id}`)
+                router.push(`/boards/${result.data.createBoard._id}`)
                 // setData(result.data.createBoard._id)
             }
             catch(error){
@@ -86,7 +111,8 @@ export default function BoardWriteFunction(){
         }
     }
     return(
-        <BoardWriteUI 
+        <BoardWriteUI
+        isActive = {isActive}
         name= {name}
         password={password}
         title={title}
