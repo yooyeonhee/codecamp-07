@@ -175,6 +175,7 @@ export const Num = styled.div`
 export const Title = styled.div`
     width: 65%;
     text-align: center;
+    cursor: pointer;
 `
 export const Writer = styled.div`
     width: 10%;

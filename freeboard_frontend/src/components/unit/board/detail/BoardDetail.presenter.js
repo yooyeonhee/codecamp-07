@@ -47,9 +47,9 @@ export default function BoardDetailUI(props){
                 </S.Board>
                 <S.FunctionButtonArea>
                     <S.ButtonWrapper>
-                        <S.FunctionButton>목록으로</S.FunctionButton>
-                        <S.FunctionButton>수정하기</S.FunctionButton>
-                        <S.FunctionButton>삭제하기</S.FunctionButton>
+                        <S.FunctionButton onClick={props.onClickMoveToList}>목록으로</S.FunctionButton>
+                        <S.FunctionButton onClick={props.onClickMoveToEdit}>수정하기</S.FunctionButton>
+                        <S.FunctionButton onClick={props.onClickDelete}>삭제하기</S.FunctionButton>
                     </S.ButtonWrapper>
                 </S.FunctionButtonArea>
                 <S.CommentArea>

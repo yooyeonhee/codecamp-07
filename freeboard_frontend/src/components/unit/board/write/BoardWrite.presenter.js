@@ -4,11 +4,11 @@ export default function BoardWriteUI(props){
     
     return(
         <Body>
-            <Title>게시물 등록</Title>
+            <Title>{props.isEdit ? "수정 페이지" : "등록 페이지"}</Title>
             <ParentIdDiv>
                 <IdDiv>
                     <SubTitle aaa="blue">작성자</SubTitle>
-                    <IdInput type="text" onChange={props.onChangeName} placeholder="이름을 적어주세요.">
+                    <IdInput type="text" onChange={props.onChangeName} placeholder="이름을 적어주세요." defaultValue={props.boardData?.fetchBoard.writer}>
                     </IdInput>
                     <ErrorBox>{props.nameError}</ErrorBox>
                 </IdDiv>
@@ -21,13 +21,13 @@ export default function BoardWriteUI(props){
             </ParentIdDiv>
             <ChildDiv>
                 <SubTitle>제목</SubTitle>
-                <TitleInput type="text" onChange={props.onChangeTitle} placeholder="제목을 작성해주세요.">
+                <TitleInput type="text" onChange={props.onChangeTitle} placeholder="제목을 작성해주세요." defaultValue={props.boardData?.fetchBoard.title}>
                 </TitleInput>
                 <ErrorBox>{props.titleError}</ErrorBox>
             </ChildDiv>
             <ChildDiv>
                 <SubTitle>내용</SubTitle>
-                <BoardInput type="text" onChange={props.onChangeContents} placeholder="내용을 작성해주세요.">
+                <BoardInput type="text" onChange={props.onChangeContents} placeholder="내용을 작성해주세요." defaultValue={props.boardData?.fetchBoard.contents}>
                 </BoardInput>
                 <ErrorBox>{props.contentsError}</ErrorBox>
             </ChildDiv>
@@ -68,7 +68,7 @@ export default function BoardWriteUI(props){
                     <ChooseMain type="radio" name="main"/> <ChooseLabel>사진</ChooseLabel>
                 </ChooseDiv>
             </ChildDiv>
-            <Enroll isActive={props.isActive}onClick={props.onClickSubmit}>등록하기</Enroll>
+            <Enroll isActive={props.isActive}onClick={props.isEdit ? props.onClickUpdate :props.onClickSubmit}>{props.isEdit ? "수정": "등록"}하기</Enroll>
 
         </Body>
     )

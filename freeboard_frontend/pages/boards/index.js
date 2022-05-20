@@ -1,6 +1,7 @@
 import * as S from "../../styles/emotion_list"
 import {useQuery, gql} from '@apollo/client'
 import { getDate } from "../../src/commons/libraries/utils"
+import { useRouter } from "next/router"
 import { useState } from "react"
 
 const FETCH_BOARDS = gql`
@@ -16,6 +17,11 @@ const FETCH_BOARDS = gql`
 
 export default function ListPage () {
     const { data } = useQuery(FETCH_BOARDS)
+    const router = useRouter()
+
+    const onClickTitleToDetail = (event) => {
+        router.push(`/boards/${event.target.id}`);
+    }
     // const [checkList, setCheckList] = useState([]);
 
     // const onCheckedItem = (list) => {
@@ -84,7 +90,7 @@ export default function ListPage () {
                         <S.TitleRow>
                             <S.AllCheck><input type="checkbox" /></S.AllCheck>
                             <S.TitleNum>번호</S.TitleNum>
-                            <S.TitleTitle>제목</S.TitleTitle>
+                            <S.TitleTitle >제목</S.TitleTitle>
                             <S.TitleWriter>작성자</S.TitleWriter>
                             <S.TitleDate>날짜</S.TitleDate>
                         </S.TitleRow>
@@ -93,7 +99,7 @@ export default function ListPage () {
                                 {/* <S.Num>{String(el._id).slice(-4).toUpperCase}</S.Num> */}
                                 <S.Check><input type="checkbox"/></S.Check>
                                 <S.Num>{indx+1}</S.Num>
-                                <S.Title>{el.title}</S.Title>
+                                <S.Title id = {el._id} onClick={onClickTitleToDetail}>{el.title}</S.Title>
                                 <S.Writer>{el.writer}</S.Writer>
                                 <S.Date>{getDate(el.createdAt)}</S.Date>
                             </S.Row>

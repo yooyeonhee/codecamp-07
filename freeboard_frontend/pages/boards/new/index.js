@@ -3,6 +3,6 @@ import BoardWriteFunction from "../../../src/components/unit/board/write/BoardWr
 export default function BoardWriteNewPage(){
 
     return(
-        <BoardWriteFunction/>
+        <BoardWriteFunction isEdit={false}/>
     )
 }

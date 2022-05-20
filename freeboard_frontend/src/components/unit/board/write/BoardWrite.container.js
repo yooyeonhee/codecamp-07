@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardWriteUI from './BoardWrite.presenter';
-import {CREATE_BOARD} from './BoardWrite.queries'
+import {CREATE_BOARD, UPDATE_BOARD} from './BoardWrite.queries'
+import { printIntrospectionSchema } from 'graphql';
 
 
-export default function BoardWriteFunction(){
+export default function BoardWriteFunction(props){
     const router = useRouter()
     // const [data, setData] = useState("")
     const [isActive, setIsActive] = useState(false)
@@ -18,6 +19,7 @@ export default function BoardWriteFunction(){
     const [titleError, setTitleError] = useState("")
     const [contentsError, setContentsError] = useState("")
     const[callGraphql] = useMutation(CREATE_BOARD)
+    const [updateBoard] = useMutation(UPDATE_BOARD)
 
     const onChangeName = (event) => {
         setName(event.target.value)
@@ -67,6 +69,18 @@ export default function BoardWriteFunction(){
             setIsActive(false)
         }
     }
+    const onClickUpdate = async() => {
+        const myVariables = {boardID: router.query.number}
+        if(title) myVariables.title = title
+        if(contents) myVariables.contents = contents
+
+        const result = await updateBoard({
+            variables: myVariables
+        })
+        router.push(`/boards/${router.query.number}`)
+        // router.push(`/08-05-boards/${router.query.number}`)
+    }
+
 
     const onClickSubmit = async() => {
         //입력사항 오류 메시지 알림
@@ -100,7 +114,8 @@ export default function BoardWriteFunction(){
                         }
                     }
                 })
-                // console.log(result)
+                console.log(result)
+
                 router.push(`/boards/${result.data.createBoard._id}`)
                 // setData(result.data.createBoard._id)
             }
@@ -126,6 +141,9 @@ export default function BoardWriteFunction(){
         onChangeName={onChangeName}
         onChangePassword={onChangePassword}
         onClickSubmit={onClickSubmit}
+        onClickUpdate={onClickUpdate}
+        isEdit = {props.isEdit}
+        boardData = {props.boardData}
         
         />
     )
