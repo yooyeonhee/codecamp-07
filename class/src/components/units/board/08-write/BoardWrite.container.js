@@ -40,7 +40,7 @@ export default function BoardWrite(props){
                 contents
             }
         })
-        router.push(`/08-05-boards/${result.data.updateBoard.number}`)
+        router.push(`/boards/${result.data.updateBoard.number}`)
         // router.push(`/08-05-boards/${router.query.number}`)
     }
 

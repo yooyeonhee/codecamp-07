@@ -24,7 +24,7 @@ export default function DynamicRoutedBoard() {
   // console.log(data)
 
   const onClickMoveToEdit = () => {
-    router.push(`/09-01-boards/${router.query.number}/edit`);
+    router.push(`/10-01-typescript-boards/${router.query.number}/edit`);
   };
   return (
     <>
