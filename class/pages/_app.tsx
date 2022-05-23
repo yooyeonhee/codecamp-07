@@ -4,6 +4,7 @@ import "../styles/globals.css";
 // {} command+i 입력 목록 뜸
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { AppProps } from "next/app";
+import "antd/dist/antd.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
