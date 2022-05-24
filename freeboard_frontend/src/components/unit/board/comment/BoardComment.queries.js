@@ -12,6 +12,7 @@ export const CREATE_COMMENT = gql`
       _id
       writer
       contents
+      rating
     }
   }
 `;
@@ -23,6 +24,7 @@ export const FETCH_COMMENTS = gql`
       writer
       contents
       createdAt
+      rating
     }
   }
 `;

@@ -13,6 +13,7 @@ export default function BoardCommentFunction() {
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState("");
   const [character, setCharacter] = useState(0);
+  const [rate, setRate] = useState(3);
   const [deleteBoardComment] = useMutation(DELETE_COMMENT);
   const [callGraphql] = useMutation(CREATE_COMMENT);
   const router = useRouter();
@@ -44,13 +45,18 @@ export default function BoardCommentFunction() {
               writer,
               password: String(password),
               contents: comment,
-              rating: 3.5,
+              rating: rate,
             },
             boardId: router.query.number,
           },
+          refetchQueries: [
+            {
+              query: FETCH_COMMENTS,
+              variables: { boardId: router.query.number },
+            },
+          ],
         });
-        location.reload();
-        // console.log(result);
+        console.log(result);
         // setData(result.data.createBoard._id)
       } catch (error) {
         console.log(error);
@@ -58,15 +64,26 @@ export default function BoardCommentFunction() {
       }
     }
   };
-  const onClickDelete = (event) => {
+  const onClickDelete = async (event) => {
     let checkPassword = prompt("비밀번호 입력");
-    deleteBoardComment({
-      variables: {
-        boardCommentId: commentData.fetchBoardComments[event.target.id]._id,
-        password: checkPassword,
-      },
-    });
-    location.reload();
+    try {
+      deleteBoardComment({
+        variables: {
+          boardCommentId: commentData.fetchBoardComments[event.target.id]._id,
+          password: checkPassword,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENTS,
+            variables: { boardId: router.query.number },
+          },
+        ],
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error.message); //백엔드 개발자가 만든 error 메시지를 보여줌
+    }
+
     // console.log(event.target);
     // console.log(commentData.fetchBoardComments[event.target.id]);
   };
@@ -74,6 +91,7 @@ export default function BoardCommentFunction() {
   return (
     <>
       <BoardCommentUI
+        setRate={setRate}
         writer={writer}
         password={password}
         comment={comment}

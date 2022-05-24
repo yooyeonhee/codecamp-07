@@ -12,6 +12,7 @@ export default function BoardWriteFunction(props) {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [youtube, setYoutube] = useState("");
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -19,6 +20,7 @@ export default function BoardWriteFunction(props) {
   const [callGraphql] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
+  // 작성자 입력
   const onChangeName = (event) => {
     setName(event.target.value);
     if (event.target.value !== "") {
@@ -30,6 +32,7 @@ export default function BoardWriteFunction(props) {
       setIsActive(false);
     }
   };
+  // 비밀번호 입력
   const onChangePassword = (event) => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
@@ -41,6 +44,8 @@ export default function BoardWriteFunction(props) {
       setIsActive(false);
     }
   };
+
+  // 제목 입력
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
@@ -52,6 +57,7 @@ export default function BoardWriteFunction(props) {
       setIsActive(false);
     }
   };
+  // 내용 입력
   const onChangeContents = (event) => {
     setContents(event.target.value);
     if (event.target.value !== "") {
@@ -63,6 +69,12 @@ export default function BoardWriteFunction(props) {
       setIsActive(false);
     }
   };
+  // 유튜브 주소 입력
+  const onChangeYoutube = (event) => {
+    setYoutube(event.target.value);
+  };
+
+  //수정하기
   const onClickUpdate = async () => {
     if (!title && !contents) {
       alert("수정한 내용이 없습니다.");
@@ -89,6 +101,7 @@ export default function BoardWriteFunction(props) {
     // router.push(`/08-05-boards/${router.query.number}`)
   };
 
+  //등록하기
   const onClickSubmit = async () => {
     //입력사항 오류 메시지 알림
     //거짓 => false , “”,  0,  undefined, null, Not a Number(NaN)
@@ -116,11 +129,12 @@ export default function BoardWriteFunction(props) {
               password: password,
               title: title,
               contents: contents,
+              youtubeUrl: youtube,
             },
           },
         });
-        console.log(result);
-
+        // console.log(result);
+        // console.log(youtube);
         router.push(`/boards/${result.data.createBoard._id}`);
         // setData(result.data.createBoard._id)
       } catch (error) {
@@ -129,6 +143,7 @@ export default function BoardWriteFunction(props) {
       }
     }
   };
+
   return (
     <BoardWriteUI
       isActive={isActive}
@@ -136,6 +151,7 @@ export default function BoardWriteFunction(props) {
       password={password}
       title={title}
       contents={contents}
+      youtube={youtube}
       nameError={nameError}
       passwordError={passwordError}
       titleError={titleError}
@@ -144,6 +160,7 @@ export default function BoardWriteFunction(props) {
       onChangeTitle={onChangeTitle}
       onChangeName={onChangeName}
       onChangePassword={onChangePassword}
+      onChangeYoutube={onChangeYoutube}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}

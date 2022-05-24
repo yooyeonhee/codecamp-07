@@ -130,11 +130,12 @@ export const ContentEvaluation = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-export const LIkeWrapper = styled.div`
+export const LikeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0px 20px;
+  cursor: pointer;
 `;
 export const LikeImg = styled.img`
   width: 20px;
@@ -151,6 +152,7 @@ export const DisLIkeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 export const DisLikeImg = styled.img`
   width: 20px;

@@ -23,13 +23,7 @@ export default function BoardCommentUI(props) {
                   placeholder="비밀번호"
                   onChange={props.onChangePassword}
                 ></S.Password>
-                <S.Star>
-                  <img src="/detail/star.png" />
-                  <img src="/detail/star.png" />
-                  <img src="/detail/star.png" />
-                  <img src="/detail/star.png" />
-                  <img src="/detail/star.png" />
-                </S.Star>
+                <S.Star onChange={props.setRate}></S.Star>
               </S.CommentInputInfo>
               <S.CommentWrite>
                 <S.CommentWriteText
@@ -60,13 +54,7 @@ export default function BoardCommentUI(props) {
                   <S.CommentShowLine1>
                     <S.CommentShowName>
                       {el.writer}
-                      <S.Star>
-                        <img src="/detail/ystar.png" />
-                        <img src="/detail/ystar.png" />
-                        <img src="/detail/ystar.png" />
-                        <img src="/detail/ystar.png" />
-                        <img src="/detail/star.png" />
-                      </S.Star>
+                      <S.Star value={el.rating} disabled></S.Star>
                     </S.CommentShowName>
                     <S.CommentShowOption>
                       <S.ModifyIcon src="/detail/modify.png"></S.ModifyIcon>

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Rate } from "antd";
 
 export const Body = styled.div`
   width: 100%;
@@ -66,14 +67,18 @@ export const Password = styled.input`
     color: #828282;
   }
 `;
-export const Star = styled.div`
-  width: auto;
-  height: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+// export const Star = styled.div`
+//   width: auto;
+//   height: 20px;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   margin-left: 20px;
+// `;
+export const Star = styled(Rate)`
   margin-left: 20px;
 `;
+
 export const CommentWrite = styled.div`
   width: 100%;
   height: 100%;

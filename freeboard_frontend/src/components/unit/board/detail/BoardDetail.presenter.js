@@ -1,5 +1,6 @@
 import * as S from "./BoardDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
+import ReactPlayer from "react-player";
 
 export default function BoardDetailUI(props) {
   return (
@@ -32,22 +33,24 @@ export default function BoardDetailUI(props) {
             <S.ContentTitle>
               {props.data ? props.data.fetchBoard.title : "loading..."}
             </S.ContentTitle>
-            <S.ContentImg src="/detail/img.png" />
+            <S.ContentImg />
             <S.Content>
               {props.data ? props.data.fetchBoard.contents : "loading"}
             </S.Content>
             <S.VideoArea>
-              <S.Video src="/detail/video.png"></S.Video>
+              <ReactPlayer
+                url={props.data ? props.data.fetchBoard.youtubeUrl : ""}
+              />
             </S.VideoArea>
             <S.ContentEvaluationArea>
               <S.ContentEvaluation>
-                <S.LIkeWrapper>
+                <S.LikeWrapper onClick={props.onClickLike}>
                   <S.LikeImg src="/detail/like.png" />
                   <S.LikeCount>
                     {props.data ? props.data.fetchBoard.likeCount : "loading"}
                   </S.LikeCount>
-                </S.LIkeWrapper>
-                <S.DisLIkeWrapper>
+                </S.LikeWrapper>
+                <S.DisLIkeWrapper onClick={props.onClickDisLike}>
                   <S.DisLikeImg src="/detail/dislike.png"></S.DisLikeImg>
                   <S.DisLikeCount>
                     {props.data
