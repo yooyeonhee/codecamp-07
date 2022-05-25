@@ -17,8 +17,14 @@ export default function BoardWriteFunction(props) {
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
+  const [isEnrollModalVisible, setIsEnrollModalVisible] = useState(false);
+  const [isAddressModalVisible, setIsAddressModalVisible] = useState(false);
+  const [resultRouteId, setResultRouteId] = useState("");
   const [callGraphql] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [address, setAddress] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   // 작성자 입력
   const onChangeName = (event) => {
@@ -74,38 +80,91 @@ export default function BoardWriteFunction(props) {
     setYoutube(event.target.value);
   };
 
+  const onChangeAddressDetail = (event) => {
+    setAddressDetail(event.target.value);
+  };
+  // enroll modal
+  const enrollShowModal = () => {
+    setIsEnrollModalVisible(true);
+  };
+
+  const enrollHandleOk = () => {
+    setIsEnrollModalVisible(false);
+    router.push(`/boards/${resultRouteId}`);
+  };
+
+  const enrollHandleCancel = () => {
+    setIsEnrollModalVisible(false);
+  };
+
+  // address modal
+  const addressShowModal = () => {
+    setIsAddressModalVisible(true);
+  };
+
+  const addressHandleOk = () => {
+    setIsAddressModalVisible(false);
+  };
+
+  const addressHandleCancel = () => {
+    setIsAddressModalVisible(false);
+  };
+
+  const addressHandleComplete = (data) => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsAddressModalVisible(false);
+  };
+
   //수정하기
   const onClickUpdate = async () => {
-    if (!title && !contents) {
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ) {
       alert("수정한 내용이 없습니다.");
       return;
     }
+
     if (!password) {
       alert("비밀번호를 입력해주세요.");
       return;
     }
 
     const updateBoardInput = {};
-    const myVariables = {
-      boardId: router.query.number,
-      password,
-      updateBoardInput,
-    };
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
-
-    const result = await updateBoard({
-      variables: myVariables,
-    });
-    router.push(`/boards/${router.query.number}`);
-    // router.push(`/08-05-boards/${router.query.number}`)
+    if (youtube) updateBoardInput.youtubeUrl = youtube;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+    try {
+      const result = await updateBoard({
+        variables: {
+          boardId: router.query.number,
+          password,
+          updateBoardInput,
+        },
+      });
+      console.log(props.boardData);
+      enrollShowModal();
+      setResultRouteId(result.data.updateBoard._id);
+      //router.push(`/boards/${router.query.number}`);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   //등록하기
   const onClickSubmit = async () => {
-    //입력사항 오류 메시지 알림
-    //거짓 => false , “”,  0,  undefined, null, Not a Number(NaN)
-    //참 => true, "~", 0을 제외한 모든 값
     if (!name) {
       setNameError("이름을 적어주세요.");
     }
@@ -130,12 +189,17 @@ export default function BoardWriteFunction(props) {
               title: title,
               contents: contents,
               youtubeUrl: youtube,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
-        // console.log(result);
-        // console.log(youtube);
-        router.push(`/boards/${result.data.createBoard._id}`);
+        enrollShowModal();
+        setResultRouteId(result.data.createBoard._id);
+        // router.push(`/boards/${result.data.createBoard._id}`);
         // setData(result.data.createBoard._id)
       } catch (error) {
         console.log(error);
@@ -165,6 +229,18 @@ export default function BoardWriteFunction(props) {
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
       boardData={props.boardData}
+      isEnrollModalVisible={isEnrollModalVisible}
+      enrollHandleCancel={enrollHandleCancel}
+      enrollHandleOk={enrollHandleOk}
+      enrollShowModal={enrollShowModal}
+      isAddressModalVisible={isAddressModalVisible}
+      addressHandleCancel={addressHandleCancel}
+      addressHandleOk={addressHandleOk}
+      addressShowModal={addressShowModal}
+      addressHandleComplete={addressHandleComplete}
+      address={address}
+      zipcode={zipcode}
+      onChangeAddressDetail={onChangeAddressDetail}
     />
   );
 }

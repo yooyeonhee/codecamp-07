@@ -68,9 +68,9 @@ export default function BoardListUI(props) {
           </S.SearchListWrapper>
         </S.SearchListArea>
         <S.FunctionButtonArea>
-          <S.DeleteBoardsButton onClick={props.onClickDeleteBoards}>
+          {/* <S.DeleteBoardsButton onClick={props.onClickDeleteBoards}>
             삭제하기
-          </S.DeleteBoardsButton>
+          </S.DeleteBoardsButton> */}
           <S.WriteNewButton onClick={props.onClickToNew}>
             등록하기
           </S.WriteNewButton>

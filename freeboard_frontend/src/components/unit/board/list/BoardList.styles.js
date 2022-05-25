@@ -192,11 +192,11 @@ export const WriteNewButton = styled.button`
   color: white;
   border-radius: 10px;
 `;
-export const DeleteBoardsButton = styled.button`
-  width: 94px;
-  height: 52px;
-  background-color: black;
-  color: white;
-  border-radius: 10px;
-  margin-right: 20px;
-`;
+// export const DeleteBoardsButton = styled.button`
+//   width: 94px;
+//   height: 52px;
+//   background-color: black;
+//   color: white;
+//   border-radius: 10px;
+//   margin-right: 20px;
+// `;

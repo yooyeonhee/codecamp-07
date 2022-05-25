@@ -10,6 +10,12 @@ const FETCH_BOARD = gql`
       title
       contents
       createdAt
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

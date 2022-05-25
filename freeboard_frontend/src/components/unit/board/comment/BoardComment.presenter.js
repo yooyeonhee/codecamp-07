@@ -1,5 +1,6 @@
 import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./BoardComment.styles";
+import { Modal } from "antd";
 
 export default function BoardCommentUI(props) {
   return (
@@ -37,16 +38,20 @@ export default function BoardCommentUI(props) {
                   <S.CommentWriteTextCount>
                     {props.character}/100
                   </S.CommentWriteTextCount>
-                  <S.CommentWriteSubmitButton onClick={props.onClickSubmit}>
-                    등록하기
+                  <S.CommentWriteSubmitButton
+                    onClick={
+                      props.isEdit ? props.onClickUpdate : props.onClickSubmit
+                    }
+                  >
+                    {props.isEdit ? "수정" : "등록"}하기
                   </S.CommentWriteSubmitButton>
                 </S.CommentWriteSubmit>
               </S.CommentWrite>
             </S.CommentInput>
           </S.CommentInputWrapper>
-          {props.commentData?.fetchBoardComments.map((el, index) => (
-            <S.CommentShowArea key={el._id}>
-              <S.CommentShowWrapper>
+          <S.CommentShowArea>
+            {props.commentData?.fetchBoardComments.map((el, index) => (
+              <S.CommentShowWrapper key={el.id}>
                 <S.CommentProfileImg>
                   <S.PersonalImg src="/detail/profile.png"></S.PersonalImg>
                 </S.CommentProfileImg>
@@ -57,12 +62,29 @@ export default function BoardCommentUI(props) {
                       <S.Star value={el.rating} disabled></S.Star>
                     </S.CommentShowName>
                     <S.CommentShowOption>
-                      <S.ModifyIcon src="/detail/modify.png"></S.ModifyIcon>
+                      <S.ModifyIcon
+                        id={el._id}
+                        src="/detail/modify.png"
+                        onClick={props.ChangeEdit}
+                      ></S.ModifyIcon>
                       <S.DeleteIcon
-                        id={index}
+                        // id={index}
+                        id={el._id}
                         src="/detail/delete.png"
-                        onClick={props.onClickDelete}
+                        onClick={props.showModal}
                       ></S.DeleteIcon>
+                      {props.isModalVisible && (
+                        <Modal
+                          title="비밀번호를 입력해주세요."
+                          visible={props.isModalVisible}
+                          onOk={props.handleOk}
+                        >
+                          <input
+                            type="password"
+                            onChange={props.onChangeCheckPassword}
+                          />
+                        </Modal>
+                      )}
                     </S.CommentShowOption>
                   </S.CommentShowLine1>
                   <S.CommentShowLine2>{el.contents}</S.CommentShowLine2>
@@ -71,8 +93,8 @@ export default function BoardCommentUI(props) {
                   </S.CommentShowLine3>
                 </S.CommentShowInfo>
               </S.CommentShowWrapper>
-            </S.CommentShowArea>
-          ))}
+            ))}
+          </S.CommentShowArea>
         </S.CommentArea>
       </S.Wrapper>
     </S.Body>

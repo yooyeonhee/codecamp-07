@@ -10,6 +10,7 @@ import {
   SubTitle,
   BoardInput,
   PostNum,
+  PostAutoInput,
   PostInput,
   SearchPost,
   UpLoad,
@@ -23,6 +24,8 @@ import {
   Enroll,
   ErrorBox,
 } from "./BoardWrite.styles";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardWriteUI(props) {
   return (
@@ -72,13 +75,37 @@ export default function BoardWriteUI(props) {
       <ChildDiv>
         <SubTitle>주소</SubTitle>
         <ParentDiv>
-          <PostNum>07250</PostNum>
-          <SearchPost>우편번호 검색</SearchPost>
+          <PostNum
+            readOnly
+            value={
+              props.zipcode || props.boardData?.fetchBoard.boardAddress?.zipcode
+            }
+          ></PostNum>
+          <SearchPost onClick={props.addressShowModal}>
+            우편번호 검색
+          </SearchPost>
+          {props.isAddressModalVisible && (
+            <Modal
+              title="주소검색"
+              visible={true}
+              onOk={props.addressHandleOk}
+              onCancel={props.addressHandleCancel}
+            >
+              <DaumPostcode onComplete={props.addressHandleComplete} />
+            </Modal>
+          )}
         </ParentDiv>
-        <PostInput type="text"></PostInput>
+        <PostAutoInput
+          readOnly
+          value={
+            props.address || props.boardData?.fetchBoard.boardAddress?.address
+          }
+        ></PostAutoInput>
         <PostInput
           type="text"
           placeholder="상세 주소를 입력해주세요."
+          onChange={props.onChangeAddressDetail}
+          defaultValue={props.boardData?.fetchBoard.boardAddress?.addressDetail}
         ></PostInput>
       </ChildDiv>
       <ChildDiv>
@@ -120,6 +147,15 @@ export default function BoardWriteUI(props) {
       >
         {props.isEdit ? "수정" : "등록"}하기
       </Enroll>
+      {props.isEnrollModalVisible && (
+        <Modal
+          visible={props.isEnrollModalVisible}
+          onOk={props.enrollHandleOk}
+          onCancel={props.enrollHandleCancel}
+        >
+          <p>게시글 {props.isEdit ? "수정" : "등록"}에 성공하셨습니다.</p>
+        </Modal>
+      )}
     </Body>
   );
 }

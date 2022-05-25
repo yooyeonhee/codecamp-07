@@ -15,9 +15,9 @@ export default function BoardListFunction() {
     router.push(`/boards/${event.currentTarget.id}`);
     // console.log(event.currentTarget);
   };
-  const onClickDeleteBoards = () => {
-    console.log(checkList.length);
-  };
+  // const onClickDeleteBoards = () => {
+  //   console.log(checkList.length);
+  // };
 
   const onClickToNew = () => {
     router.push(`/boards/new`);
@@ -57,7 +57,7 @@ export default function BoardListFunction() {
       best={best}
       onClickTitleToDetail={onClickTitleToDetail}
       onClickToNew={onClickToNew}
-      onClickDeleteBoards={onClickDeleteBoards}
+      // onClickDeleteBoards={onClickDeleteBoards}
       // onClickCheckAll={onClickCheckAll}
       // onCheckedItem={onCheckedItem}
       // isChecked={isChecked}
