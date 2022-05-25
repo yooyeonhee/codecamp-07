@@ -1,16 +1,17 @@
-import { useState } from "react";
 import { Modal, Button } from "antd";
+import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-export default function ModalCustomPage() {
+
+export default function ModalAddressCustomPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [address, setAddress] = useState("");
+
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
     setIsModalVisible(false);
-    console.log(address);
   };
 
   const handleCancel = () => {
@@ -23,11 +24,15 @@ export default function ModalCustomPage() {
   };
 
   return (
-    <div>
-      <Button onClick={showModal}>Open Modal</Button>
-      {/* 모달 삭제하고 새로 만드는 방법 */}
+    <div style={{ display: "flex" }}>
+      <Button onClick={showModal}>모달열기</Button>
       {isModalVisible && (
-        <Modal visible={true} onOk={handleOk} onCancel={handleCancel}>
+        <Modal
+          title="주소검색"
+          visible={true}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
           <DaumPostcode onComplete={handleComplete} />
         </Modal>
       )}
