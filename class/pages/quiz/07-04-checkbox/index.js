@@ -31,13 +31,16 @@ export default function TemplateStringsArray() {
     // checklist에 현재 선택한 객체가 들어있지 않다.
     if (checkList.every((cur) => cur.number !== list.number)) {
       setCheckList([...checkList, list]);
-    } else {
+    }
+    // checklist에 현재 선택한 객체가 들어있다.
+    else {
       const result = checkList.filter((cur) => cur.number !== list.number);
       setCheckList(result);
-      console.log(result);
+      // console.log(result);
     }
   };
 
+  // true인 경우 체크 표시된 상태
   const isChecked = (list) => {
     return checkList.some((cur) => cur.number === list.number);
   };

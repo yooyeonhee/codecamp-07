@@ -5,9 +5,9 @@ import "../styles/globals.css";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { AppProps } from "next/app";
 import "antd/dist/antd.css";
-import Layout from "../src/components/commons/layout";
+import Layout from "../quizsrc/components/commons/layout";
 import { Global } from "@emotion/react";
-import { globalStyles } from "../src/commons/styles/globalStyles";
+import { globalStyles } from "../quizsrc/commons/styles/globalStyles";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
