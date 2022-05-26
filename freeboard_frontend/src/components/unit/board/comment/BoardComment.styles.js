@@ -133,6 +133,7 @@ export const CommentShowWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
+  padding-bottom: 20px;
 `;
 export const CommentProfileImg = styled.div`
   width: 45px;

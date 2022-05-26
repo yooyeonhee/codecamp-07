@@ -49,8 +49,8 @@ export default function BoardCommentUI(props) {
               </S.CommentWrite>
             </S.CommentInput>
           </S.CommentInputWrapper>
-          <S.CommentShowArea>
-            {props.commentData?.fetchBoardComments.map((el, index) => (
+          {props.commentData?.fetchBoardComments.map((el, index) => (
+            <S.CommentShowArea>
               <S.CommentShowWrapper key={el.id}>
                 <S.CommentProfileImg>
                   <S.PersonalImg src="/detail/profile.png"></S.PersonalImg>
@@ -93,8 +93,8 @@ export default function BoardCommentUI(props) {
                   </S.CommentShowLine3>
                 </S.CommentShowInfo>
               </S.CommentShowWrapper>
-            ))}
-          </S.CommentShowArea>
+            </S.CommentShowArea>
+          ))}
         </S.CommentArea>
       </S.Wrapper>
     </S.Body>

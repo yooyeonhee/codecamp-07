@@ -120,6 +120,8 @@ export default function BoardCommentFunction() {
       variables: myComment,
     });
     console.log(result);
+    setIsEdit((prev) => !prev);
+
     // console.log(props.boardData);
   };
   //삭제 modal

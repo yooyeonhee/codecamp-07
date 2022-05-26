@@ -121,7 +121,7 @@ export default function BoardWriteFunction(props) {
     if (
       !title &&
       !contents &&
-      !youtubeUrl &&
+      !youtube &&
       !address &&
       !addressDetail &&
       !zipcode

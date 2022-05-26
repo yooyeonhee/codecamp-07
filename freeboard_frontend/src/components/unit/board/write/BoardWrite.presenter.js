@@ -113,6 +113,7 @@ export default function BoardWriteUI(props) {
         <YoutubeInput
           onChange={props.onChangeYoutube}
           placeholder="링크를 복사해주세요."
+          defaultValue={props.boardData?.fetchBoard.youtubeUrl}
         ></YoutubeInput>
       </ChildDiv>
       <ChildDiv>

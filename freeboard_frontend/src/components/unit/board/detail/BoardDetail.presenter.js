@@ -70,7 +70,7 @@ export default function BoardDetailUI(props) {
             <S.FunctionButton onClick={props.onClickMoveToEdit}>
               수정하기
             </S.FunctionButton>
-            <S.FunctionButton onClick={props.onClickDelete}>
+            <S.FunctionButton onClick={props.showDeleteConfirm} type="dashed">
               삭제하기
             </S.FunctionButton>
           </S.ButtonWrapper>

@@ -1,6 +1,9 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardDetailUI from "./BoardDetail.presenter";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
+const { confirm } = Modal;
 import {
   FETCH_BOARD,
   DELETE_BOARD,
@@ -69,6 +72,25 @@ export default function BoardDetailFunction() {
       alert(error.message);
     }
   };
+
+  const showDeleteConfirm = () => {
+    confirm({
+      title: "게시글을 삭제하시겠습니까?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "네",
+      okType: "danger",
+      cancelText: "아니요",
+
+      onOk() {
+        onClickDelete();
+      },
+
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
   return (
     <>
       <BoardDetailUI
@@ -77,6 +99,7 @@ export default function BoardDetailFunction() {
         onClickDelete={onClickDelete}
         onClickDisLike={onClickDisLike}
         onClickLike={onClickLike}
+        showDeleteConfirm={showDeleteConfirm}
         router={router}
         data={data}
       />

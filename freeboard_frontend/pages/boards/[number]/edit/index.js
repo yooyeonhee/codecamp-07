@@ -10,6 +10,7 @@ const FETCH_BOARD = gql`
       title
       contents
       createdAt
+      youtubeUrl
       boardAddress {
         _id
         zipcode
