@@ -11,7 +11,7 @@ import { globalStyles } from "../quizsrc/commons/styles/globalStyles";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
-    uri: "http://example.codebootcamp.co.kr/graphql",
+    uri: "http://backend07.codebootcamp.co.kr/graphql",
     cache: new InMemoryCache(),
   });
   return (
