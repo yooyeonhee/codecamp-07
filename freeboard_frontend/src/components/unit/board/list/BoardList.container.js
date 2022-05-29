@@ -1,12 +1,17 @@
 import { useRouter } from "next/router";
 import BoardListUI from "./BoardList.presenter";
 import { useQuery } from "@apollo/client";
-import { BEST_FETCH_BOARDS, FETCH_BOARDS } from "./BoardList.queries";
+import {
+  BEST_FETCH_BOARDS,
+  FETCH_BOARDS,
+  FETCH_BOARDS_COUNT,
+} from "./BoardList.queries";
 import { useState } from "react";
 
 export default function BoardListFunction() {
-  const { data } = useQuery(FETCH_BOARDS);
+  const { data, refetch } = useQuery(FETCH_BOARDS);
   const { data: best } = useQuery(BEST_FETCH_BOARDS);
+  const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
   const router = useRouter();
   const [checkList, setCheckList] = useState([]);
 
@@ -57,6 +62,8 @@ export default function BoardListFunction() {
       best={best}
       onClickTitleToDetail={onClickTitleToDetail}
       onClickToNew={onClickToNew}
+      refetch={refetch}
+      count={dataBoardsCount?.fetchBoardsCount}
       // onClickDeleteBoards={onClickDeleteBoards}
       // onClickCheckAll={onClickCheckAll}
       // onCheckedItem={onCheckedItem}

@@ -18,20 +18,14 @@ export const CREATE_COMMENT = gql`
 `;
 
 export const FETCH_COMMENTS = gql`
-  query fetchBoardComments($boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
+  query fetchBoardComments($page: Int, $boardId: ID!) {
+    fetchBoardComments(page: $page, boardId: $boardId) {
       _id
       writer
       contents
       createdAt
       rating
     }
-  }
-`;
-
-export const DELETE_COMMENT = gql`
-  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
-    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
   }
 `;
 

@@ -1,4 +1,5 @@
 import { getDate } from "../../../../commons/libraries/utils";
+import Pagination01 from "../../../commons/pagination/01/pagination.container";
 import * as S from "./BoardList.styles";
 
 export default function BoardListUI(props) {
@@ -71,6 +72,7 @@ export default function BoardListUI(props) {
           {/* <S.DeleteBoardsButton onClick={props.onClickDeleteBoards}>
             삭제하기
           </S.DeleteBoardsButton> */}
+          <Pagination01 refetch={props.refetch} count={props.count} />
           <S.WriteNewButton onClick={props.onClickToNew}>
             등록하기
           </S.WriteNewButton>
