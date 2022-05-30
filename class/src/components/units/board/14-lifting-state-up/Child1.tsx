@@ -1,9 +1,7 @@
-import { useState } from "react";
-
-export default function Child1(props) {
+export default function Child1(props: any) {
   // 방법 - 2
   const aaa = () => {
-    props.setCount((prev) => prev + 1);
+    props.setCount((prev: any) => prev + 1);
   };
 
   return (

@@ -61,6 +61,7 @@ export default function PaginationPage() {
   };
 
   const onClickToNext = () => {
+    console.log(startPage);
     if (startPage + 10 <= lastPage) {
       setStartPage((prev) => prev + 10);
       refetch({ page: startPage + 10 });

@@ -1,4 +1,4 @@
-export default function Child2(props) {
+export default function Child2(props: any) {
   return (
     <div>
       <div>자식2의 카운트: {props.count}</div>

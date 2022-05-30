@@ -47,7 +47,7 @@ export default function MapBoardPage() {
 
   return (
     <div>
-      {data?.fetchBoards.map((el: any, index) => (
+      {data?.fetchBoards.map((el: any, index: any) => (
         <div key={el.id}>
           {myIndex[index] === false && (
             <MyRow key={el._id}>
@@ -59,7 +59,7 @@ export default function MapBoardPage() {
             </MyRow>
           )}
           {myIndex[index] === true && <div>수정하기 화면입니다.</div>}
-          {/* {index !== myIndex ? (
+          {index !== myIndex ? (
             <MyRow key={el._id}>
               <MyColumn>{el.writer}</MyColumn>
               <MyColumn>{el.title}</MyColumn>
@@ -69,7 +69,7 @@ export default function MapBoardPage() {
             </MyRow>
           ) : (
             <div>수정하기 화면입니다.</div>
-          )} */}
+          )}
         </div>
       ))}
     </div>

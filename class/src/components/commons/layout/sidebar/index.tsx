@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  height: 600px;
+  height: 300px;
   background-color: orange;
 `;
 export default function LayoutSidebar() {

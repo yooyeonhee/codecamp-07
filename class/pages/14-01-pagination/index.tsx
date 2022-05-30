@@ -37,7 +37,7 @@ export default function MapBoardPage() {
       ))}
 
       {/* 사용하지 않는 값은 _로 표시해준다. */}
-      {new Array(20).fill(1).map((_, index) => (
+      {new Array(10).fill(1).map((_, index) => (
         <span key={index + 1} id={String(index + 1)} onClick={onClickPage}>
           {index + 1}
         </span>
