@@ -66,6 +66,7 @@ export default function BoardCommentListUI(props) {
                 setIsEdit={props.setIsEdit}
                 setAddress={props.setAddress}
                 address={props.address}
+                el={el}
               />
             )}
           </S.CommentShow>

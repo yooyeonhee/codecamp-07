@@ -65,6 +65,7 @@ export default function BoardCommentListFunction() {
 
   // 댓글 수정 함수
   const onClickUpdate = async (event) => {
+    console.log(event.target);
     setAddress(event.target.id);
     setIsEdit((prev) => !prev);
   };

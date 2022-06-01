@@ -8,10 +8,12 @@ const Wrapper = styled.div`
   font-size: 30px;
 `;
 const BannerDiv = styled.div`
-  padding: 0px 200px;
+  width: 100%;
+  height: 100%;
 `;
 const Img = styled.img`
   margin: 0px auto;
+  object-fit: cover;
 `;
 const StyledSlider = styled(Slider)`
   height: 90%;
@@ -23,7 +25,7 @@ const StyledSlider = styled(Slider)`
 
   .slick-dots {
     //슬라이드의 위치
-    bottom: -50px;
+    bottom: -20px;
   }
   .slick-prev:before {
     font-size: 50px;
@@ -31,10 +33,11 @@ const StyledSlider = styled(Slider)`
     left: -100px;
     color: #ccc;
   }
+
   .slick-next:before {
     font-size: 50px;
     position: absolute;
-    right: -100px;
+    right: 100px;
     color: #ccc;
   }
 `;
@@ -48,7 +51,6 @@ export default function LayoutBanner() {
   };
   return (
     <Wrapper>
-      Banner Area
       <BannerDiv>
         <StyledSlider {...settings}>
           <div>

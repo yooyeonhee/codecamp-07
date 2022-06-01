@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const Body = styled.div`
   width: 100vw;
   height: auto;
+  max-width: 100%;
 `;
 
 export const Wrapper = styled.div`
@@ -39,7 +40,7 @@ export const BoxBoardWrapper = styled.div`
   height: 257px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  background-color: green;
+  background-color: #b1e1e2;
   &:hover {
     transform: scale(1.05);
     transition: all 0.5s;
@@ -188,9 +189,11 @@ export const FunctionButtonArea = styled.div`
 export const WriteNewButton = styled.button`
   width: 94px;
   height: 52px;
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: black;
   border-radius: 10px;
+  margin-left: 400px;
+  border: 1px solid black;
 `;
 // export const DeleteBoardsButton = styled.button`
 //   width: 94px;

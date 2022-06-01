@@ -7,3 +7,10 @@ export const Page = styled.span`
   font-weight: ${(props) => (props.isActive ? "bold" : "normal")};
   cursor: ${(props) => (props.isActive ? "none" : "pointer")};
 `;
+
+export const Pages = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 300px;
+`;

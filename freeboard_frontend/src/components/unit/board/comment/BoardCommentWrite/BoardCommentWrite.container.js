@@ -37,7 +37,7 @@ export default function BoardCommentWriteFunction(props) {
   };
   // 댓글 등록 함수
   const onClickSubmit = async () => {
-    console.log(props.isEdit);
+    console.log(props.commentData.fetchBoardComments);
     if (writer && password && contents) {
       try {
         //정보 저장 api 함수
@@ -61,6 +61,7 @@ export default function BoardCommentWriteFunction(props) {
           ],
         });
         console.log(result);
+        console.log(props.isEdit);
       } catch (error) {
         alert(error.message); //백엔드 개발자가 만든 error 메시지를 보여줌
       }
@@ -70,7 +71,6 @@ export default function BoardCommentWriteFunction(props) {
   //댓글 수정 함수
   const onClickUpdate = async () => {
     props.setIsEdit((prev) => !prev);
-    console.log("update");
     if (!contents && !rate) {
       alert("수정한 내용이 없습니다.");
       return;
@@ -103,12 +103,15 @@ export default function BoardCommentWriteFunction(props) {
     // console.log(props.boardData);
   };
 
+  console.log(props.el);
+
   return (
     <BoardCommentWriteUI
       writer={writer}
       password={password}
       contents={contents}
       count={count}
+      el={props.el}
       setRate={setRate}
       onChangeContents={onChangeContents}
       onChangePassword={onChangePassword}

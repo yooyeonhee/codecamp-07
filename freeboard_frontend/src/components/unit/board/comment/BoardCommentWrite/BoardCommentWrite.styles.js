@@ -6,7 +6,8 @@ export const CommentWriteArea = styled.div`
   height: 100%;
 `;
 export const CommentInputWrapper = styled.div`
-  width: 100%;
+  width: 1400px;
+  margin: 50px auto;
   height: auto;
   display: flex;
   flex-direction: column;

@@ -7,7 +7,8 @@ export const CommentListArea = styled.div`
   overflow: auto;
 `;
 export const CommentShow = styled.div`
-  width: 100%;
+  margin: 50px auto;
+  width: 1400px;
   height: auto;
   display: flex;
   flex-direction: column;

@@ -7,7 +7,7 @@ export default function BoardListUI(props) {
     <S.Body>
       <S.Wrapper>
         <S.BoxBoardArea>
-          <S.BoxBoardTitle>베스트 게시글</S.BoxBoardTitle>
+          <S.BoxBoardTitle>Best Review</S.BoxBoardTitle>
           <S.BoxBoards>
             {props.best?.fetchBoardsOfTheBest.map((el) => (
               <S.BoxBoardWrapper key={el._id}>

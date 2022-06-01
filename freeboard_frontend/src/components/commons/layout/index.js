@@ -1,27 +1,35 @@
-// import styled from "@emotion/styled";
+import styled from "@emotion/styled";
 // import {ReactNode} from "react"
-import LayoutHeader from "./header";
+
 import LayoutBanner from "./banner";
-import LayoutNavigation from "./navigation";
+import LayoutNavigation from "./navigation/navigation.container";
 import LayoutFooter from "./footer";
+import LayoutHeader from "./header/LayoutHeader.container";
+import { useRouter } from "next/router";
 // interface ILayoutProps {
 //   children: ReactNode;
 // }
-
-// const Wrapper = styled.div`
-//   height: 100%;
-//   width: 100%;
-// `;
+const HIDDEN_HEADERS = ["/"];
+const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 export default function FreeboardLayout(props) {
+  const router = useRouter();
+  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
   //  console.log(router)
   return (
     <>
-      <LayoutHeader />
-      <LayoutBanner />
-      <LayoutNavigation />
-      <div>{props.children}</div>
-      <LayoutFooter />
+      {!isHiddenHeader && (
+        <>
+          <LayoutHeader />
+          <LayoutBanner />
+          <LayoutNavigation />
+        </>
+      )}
+      <Wrapper>{props.children}</Wrapper>
+      {!isHiddenHeader && <LayoutFooter />}
     </>
   );
 }
