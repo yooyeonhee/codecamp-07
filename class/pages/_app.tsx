@@ -9,6 +9,24 @@ import Layout from "../quizsrc/components/commons/layout";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../quizsrc/commons/styles/globalStyles";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBXRDHne_8ijDJpY6vWUfAKOPhNaLpN2ps",
+  authDomain: "my-first-portfolio-5ddf8.firebaseapp.com",
+  projectId: "my-first-portfolio-5ddf8",
+  storageBucket: "my-first-portfolio-5ddf8.appspot.com",
+  messagingSenderId: "698708720889",
+  appId: "1:698708720889:web:020e02a8fa04aa95d87628",
+};
+
+// Initialize Firebase
+export const firebaseApp = initializeApp(firebaseConfig);
+
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     uri: "http://backend07.codebootcamp.co.kr/graphql",
