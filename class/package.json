@@ -16,6 +16,7 @@
     "@mui/material": "^5.6.4",
     "@types/react-slick": "^0.23.8",
     "antd": "^4.20.3",
+    "apollo-upload-client": "^17.0.0",
     "axios": "^0.27.2",
     "firebase": "^9.8.2",
     "graphql": "^16.4.0",
@@ -31,6 +32,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@types/apollo-upload-client": "^17.0.0",
     "@types/node": "^17.0.34",
     "@types/react": "^17.0.2",
     "@types/react-infinite-scroller": "^1.2.3",
