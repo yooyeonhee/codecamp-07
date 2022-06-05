@@ -17,7 +17,9 @@ export default function BoardWriteUI(props: any) {
         ref={props.fileRef}
         multiple
       ></S.Image>
-      <S.ImageShow onClick={props.onClickImage}>+</S.ImageShow>
+      <S.ImageShow onClick={props.onClickImage}>
+        <S.picIcon />
+      </S.ImageShow>
       <S.SaveButton onClick={props.onClickCreateBoard}>저장하기</S.SaveButton>
       선택된 이미지
       <S.PickImage

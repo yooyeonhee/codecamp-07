@@ -1,3 +1,4 @@
+import { LikeOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
@@ -32,7 +33,6 @@ export const ImageShow = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #ccc;
 `;
 export const PickImage = styled.img`
   margin: 10px;
@@ -40,4 +40,7 @@ export const PickImage = styled.img`
 export const SaveButton = styled.button`
   width: 200px;
   margin: 10px;
+`;
+export const picIcon = styled(LikeOutlined)`
+  font-size: 30px;
 `;

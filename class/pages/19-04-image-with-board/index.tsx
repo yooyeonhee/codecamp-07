@@ -102,7 +102,6 @@ export default function GraphqlMutationPage() {
           onChange={onChangeFile}
           multiple
           style={{ display: "none" }}
-          accept="image/png"
         />
         <img src={`https://storage.googleapis.com/${imageUrl}`} />
       </div>
