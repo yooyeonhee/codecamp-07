@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 // 게시물 영역
 export const Board = styled.div`
   width: 100%;
-  height: 1620px;
+  height: auto;
   padding: 80px 100px;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -98,6 +98,16 @@ export const ContentTitle = styled.span`
 export const ContentImg = styled.img`
   width: 100%;
   height: 480px;
+`;
+export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Image = styled.img`
+  width: 996px;
+  height: 480px;
+  margin-bottom: 30px;
 `;
 // pre를 쓰면 Textarea에 입력된 줄바꿈까지 반영해서 출력 할 수 있다.
 export const Content = styled.pre`

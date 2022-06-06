@@ -33,7 +33,17 @@ export default function BoardDetailUI(props) {
             <S.ContentTitle>
               {props.data ? props.data.fetchBoard.title : "loading..."}
             </S.ContentTitle>
-            <S.ContentImg />
+            <S.ImageWrapper>
+              {props.data?.fetchBoard.images
+                ?.filter((el) => el)
+                .map((el) => (
+                  <S.Image
+                    key={el}
+                    src={`https://storage.googleapis.com/${el}`}
+                  />
+                ))}
+            </S.ImageWrapper>
+            {/* <S.ContentImg /> */}
             <S.Content>
               {props.data ? props.data.fetchBoard.contents : "loading"}
             </S.Content>

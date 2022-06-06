@@ -9,29 +9,34 @@ const Wrapper = styled.div`
 `;
 const BannerDiv = styled.div`
   width: 100%;
-  height: 100%;
+  height: 400px;
 `;
 const Img = styled.img`
+  width: 100%;
+  height: 400px;
   margin: 0px auto;
   object-fit: cover;
 `;
 const StyledSlider = styled(Slider)`
-  height: 90%;
+  width: 100%;
+  height: 400px;
+  /* height: 90%; */
 
   .slick-slide div {
-    height: 300px;
+    height: 400px;
     width: 100%;
   }
 
   .slick-dots {
     //슬라이드의 위치
-    bottom: -20px;
+    bottom: 20px;
   }
   .slick-prev:before {
     font-size: 50px;
     position: absolute;
     left: -100px;
     color: #ccc;
+    display: none;
   }
 
   .slick-next:before {
@@ -39,6 +44,7 @@ const StyledSlider = styled(Slider)`
     position: absolute;
     right: 100px;
     color: #ccc;
+    display: none;
   }
 `;
 export default function LayoutBanner() {
@@ -48,13 +54,15 @@ export default function LayoutBanner() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
   return (
     <Wrapper>
       <BannerDiv>
         <StyledSlider {...settings}>
           <div>
-            <Img src="/banner/banner1.png" />
+            <Img src="/banner/banner1.jpg" />
           </div>
           <div>
             <Img src="/banner/banner2.png" />

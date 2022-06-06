@@ -20,7 +20,7 @@ export default function BoardDetailFunction() {
     variables: { boardId: router.query.number },
   });
   // console.log(router.query)
-  // console.log(data)s
+  console.log(data);
 
   const onClickMoveToEdit = () => {
     router.push(`/boards/${router.query.number}/edit`);

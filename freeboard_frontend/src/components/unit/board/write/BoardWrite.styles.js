@@ -122,6 +122,7 @@ export const PostInput = styled(MyInput)`
   height: 50px;
   margin-bottom: 20px;
 `;
+
 export const Plus = styled(MyCul)`
   align-items: center;
   justify-content: center;
@@ -131,19 +132,34 @@ export const Plus = styled(MyCul)`
   margin-right: 24px;
 `;
 export const YoutubeInput = styled(MyInput)``;
-export const UpLoad = styled(MyRow)``;
-export const PlusIcon = styled.span`
-  font-size: 25px;
-  font-weight: 100;
+// export const UpLoad = styled(MyRow)``;
+// export const PlusIcon = styled.span`
+//   font-size: 25px;
+//   font-weight: 100;
+// `;
+
+export const ImageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px 0px;
 `;
-export const PlusUpload = styled.span`
-  font-family: "Noto Sans CJK KR";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 18px;
-  color: #4f4f4f;
+
+export const InputImages = styled.div`
+  width: 600px;
+  display: flex;
+  flex-direction: row;
 `;
+
+// export const PlusUpload = styled.span`
+//   font-family: "Noto Sans CJK KR";
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 12px;
+//   line-height: 18px;
+//   color: #4f4f4f;
+// `;
 export const ChooseDiv = styled(MyRow)``;
 export const ChooseMain = styled.input`
   margin-right: 5px;

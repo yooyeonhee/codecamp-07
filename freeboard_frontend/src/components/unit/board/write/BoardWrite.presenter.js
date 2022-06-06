@@ -13,17 +13,16 @@ import {
   PostAutoInput,
   PostInput,
   SearchPost,
-  UpLoad,
-  Plus,
   YoutubeInput,
-  PlusIcon,
-  PlusUpload,
   ChooseDiv,
   ChooseMain,
   ChooseLabel,
   Enroll,
   ErrorBox,
+  ImageWrapper,
+  InputImages,
 } from "./BoardWrite.styles";
+import BoardWriteUpload from "./BoardWriteUpload/BoardWriteUpload.container";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
 
@@ -33,7 +32,7 @@ export default function BoardWriteUI(props) {
       <Title>{props.isEdit ? "수정 페이지" : "등록 페이지"}</Title>
       <ParentIdDiv>
         <IdDiv>
-          <SubTitle aaa="blue">작성자</SubTitle>
+          <SubTitle aaa="black">작성자</SubTitle>
           <IdInput
             type="text"
             onChange={props.onChangeName}
@@ -116,23 +115,19 @@ export default function BoardWriteUI(props) {
           defaultValue={props.boardData?.fetchBoard.youtubeUrl}
         ></YoutubeInput>
       </ChildDiv>
-      <ChildDiv>
-        <SubTitle>사진 첨부</SubTitle>
-        <UpLoad>
-          <Plus>
-            <PlusIcon>+</PlusIcon>
-            <PlusUpload>Upload</PlusUpload>
-          </Plus>
-          <Plus>
-            <PlusIcon>+</PlusIcon>
-            <PlusUpload>Upload</PlusUpload>
-          </Plus>
-          <Plus>
-            <PlusIcon>+</PlusIcon>
-            <PlusUpload>Upload</PlusUpload>
-          </Plus>
-        </UpLoad>
-      </ChildDiv>
+      <ImageWrapper>
+        <SubTitle>사진첨부</SubTitle>
+        <InputImages>
+          {new Array(3).fill(1).map((data, index) => (
+            <BoardWriteUpload
+              key={`${data}_${index}`}
+              index={index}
+              onChangeFiles={props.onChangeFiles}
+              fileUrls={props.fileUrls}
+            />
+          ))}
+        </InputImages>
+      </ImageWrapper>
       <ChildDiv>
         <SubTitle>메인 설정</SubTitle>
         <ChooseDiv>

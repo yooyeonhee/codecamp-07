@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
@@ -24,6 +24,8 @@ export default function BoardWriteFunction(props) {
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
+  const [files, setFiles] = useState([]); // 선택한 파일 자체 저장
+  const [fileUrls, setFileUrls] = useState([]); // 파일 미리보기 url 저장
   const [addressDetail, setAddressDetail] = useState("");
 
   // 작성자 입력
@@ -116,6 +118,23 @@ export default function BoardWriteFunction(props) {
     setIsAddressModalVisible(false);
   };
 
+  function onChangeFiles(file, index, url) {
+    const newFiles = [...files];
+    const newFileUrls = [...fileUrls];
+
+    if (files[index]) {
+      newFiles[index] = file;
+      newFileUrls[index] = url;
+    } else {
+      newFiles.push(file);
+      newFileUrls.push(url);
+    }
+
+    // 변경된 배열을 state에 저장해줍니다.
+    setFiles([...newFiles]);
+    setFileUrls([...newFileUrls]);
+  }
+
   //수정하기
   const onClickUpdate = async () => {
     if (
@@ -124,7 +143,8 @@ export default function BoardWriteFunction(props) {
       !youtube &&
       !address &&
       !addressDetail &&
-      !zipcode
+      !zipcode &&
+      !fileUrls
     ) {
       alert("수정한 내용이 없습니다.");
       return;
@@ -139,6 +159,7 @@ export default function BoardWriteFunction(props) {
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
     if (youtube) updateBoardInput.youtubeUrl = youtube;
+    if (fileUrls) updateBoardInput.images = fileUrls;
     if (zipcode || address || addressDetail) {
       updateBoardInput.boardAddress = {};
       if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
@@ -189,6 +210,7 @@ export default function BoardWriteFunction(props) {
               title: title,
               contents: contents,
               youtubeUrl: youtube,
+              images: fileUrls,
               boardAddress: {
                 zipcode,
                 address,
@@ -207,6 +229,12 @@ export default function BoardWriteFunction(props) {
       }
     }
   };
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   return (
     <BoardWriteUI
@@ -241,6 +269,8 @@ export default function BoardWriteFunction(props) {
       address={address}
       zipcode={zipcode}
       onChangeAddressDetail={onChangeAddressDetail}
+      onChangeFiles={onChangeFiles}
+      fileUrls={fileUrls}
     />
   );
 }
