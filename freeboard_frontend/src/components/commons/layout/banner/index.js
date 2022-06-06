@@ -31,6 +31,16 @@ const StyledSlider = styled(Slider)`
     //슬라이드의 위치
     bottom: 20px;
   }
+  .slick-dots li button::before {
+    font-size: 12px;
+    color: #fff;
+    opacity: 0.3;
+  }
+  .slick-dots li.slick-active button::before {
+    color: #fff;
+    opacity: 1;
+  }
+
   .slick-prev:before {
     font-size: 50px;
     position: absolute;

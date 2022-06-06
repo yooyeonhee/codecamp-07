@@ -6,14 +6,15 @@ import {
   FETCH_BOARDS,
   FETCH_BOARDS_COUNT,
 } from "./BoardList.queries";
+import _ from "lodash";
 import { useState } from "react";
 
 export default function BoardListFunction() {
   const { data, refetch } = useQuery(FETCH_BOARDS);
   const { data: best } = useQuery(BEST_FETCH_BOARDS);
   const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
+  const [keyword, setKeyword] = useState("");
   const router = useRouter();
-  const [checkList, setCheckList] = useState([]);
 
   const onClickTitleToDetail = (event) => {
     // 이벤트 버블링을 통한 이벤트 위임
@@ -56,6 +57,15 @@ export default function BoardListFunction() {
   //   return checkList.some((cur) => cur.number === list.number);
   // };
 
+  const onChangeSearch = (event) => {
+    getDebounce(event.target.value);
+  };
+
+  const getDebounce = _.debounce((data) => {
+    refetch({ search: data, page: 1 });
+    setKeyword(data);
+  }, 200);
+
   return (
     <BoardListUI
       data={data}
@@ -64,11 +74,13 @@ export default function BoardListFunction() {
       onClickToNew={onClickToNew}
       refetch={refetch}
       count={dataBoardsCount?.fetchBoardsCount}
+      onChangeSearch={onChangeSearch}
       // onClickDeleteBoards={onClickDeleteBoards}
       // onClickCheckAll={onClickCheckAll}
       // onCheckedItem={onCheckedItem}
       // isChecked={isChecked}
       // checkList={checkList}
+      keyword={keyword}
     />
   );
 }

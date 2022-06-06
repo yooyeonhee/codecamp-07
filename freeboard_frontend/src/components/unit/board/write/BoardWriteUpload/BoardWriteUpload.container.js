@@ -11,12 +11,13 @@ export default function BoardWriteUpload(props) {
   const fileRef = useRef(null);
 
   function onClickUpload() {
+    // console.log(props.fileUrls);
     fileRef.current?.click();
   }
 
   async function onChangeFile(event) {
     const file = event.target.files?.[0];
-    console.log(file);
+    // console.log(file);
     if (!checkImageFileValidation(file)) return;
     try {
       const result = await uploadFile({

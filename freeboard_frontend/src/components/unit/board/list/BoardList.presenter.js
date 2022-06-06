@@ -1,6 +1,7 @@
 import { getDate } from "../../../../commons/libraries/utils";
 import Pagination01 from "../../../commons/pagination/01/pagination.container";
 import * as S from "./BoardList.styles";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props) {
   return (
@@ -25,7 +26,11 @@ export default function BoardListUI(props) {
           <S.SearchBarWrapper>
             <S.SearchInputBox>
               <S.SearchIcon src="/list/search.png" />
-              <S.SearchInput type="text" placeholder="제목을 검색해주세요." />
+              <S.SearchInput
+                type="text"
+                placeholder="제목을 검색해주세요."
+                onChange={props.onChangeSearch}
+              />
             </S.SearchInputBox>
             <S.SearchDate>YYYY.MM.DD ~ YYYY.MM.DD</S.SearchDate>
             <S.SearchButton>검색하기</S.SearchButton>
@@ -61,7 +66,16 @@ export default function BoardListUI(props) {
                   />
                 </S.Check> */}
                 <S.Num>{indx + 1}</S.Num>
-                <S.Title>{el.title}</S.Title>
+                <S.Title>
+                  {el.title
+                    .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+                    .split("#$%")
+                    .map((el) => (
+                      <S.Word key={uuidv4()} isMatched={props.keyword === el}>
+                        {el}
+                      </S.Word>
+                    ))}
+                </S.Title>
                 <S.Writer>{el.writer}</S.Writer>
                 <S.Date>{getDate(el.createdAt)}</S.Date>
               </S.Row>

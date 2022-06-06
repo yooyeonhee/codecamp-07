@@ -137,6 +137,9 @@ export default function BoardWriteFunction(props) {
 
   //수정하기
   const onClickUpdate = async () => {
+    // const currentFiles = JSON.stringify(fileUrls);
+    // const defaultFiles = JSON.stringify(props.data.fetchBoard.images);
+    // const isChangedFiles = currentFiles !== defaultFiles;
     if (
       !title &&
       !contents &&
@@ -229,12 +232,13 @@ export default function BoardWriteFunction(props) {
       }
     }
   };
-
+  console.log(`ddd${props.boardData?.fetchBoard.images.length}`);
   useEffect(() => {
-    if (props.data?.fetchBoard.images?.length) {
-      setFileUrls([...props.data?.fetchBoard.images]);
+    if (props.boardData?.fetchBoard.images.length) {
+      console.log(`zzzzz${props.boardData?.fetchBoard.images.length}`);
+      setFileUrls([...props.boardData?.fetchBoard.images]);
     }
-  }, [props.data]);
+  }, [props.boardData]);
 
   return (
     <BoardWriteUI
