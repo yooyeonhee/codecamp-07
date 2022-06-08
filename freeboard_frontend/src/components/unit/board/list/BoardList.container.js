@@ -12,7 +12,8 @@ import { useState } from "react";
 export default function BoardListFunction() {
   const { data, refetch } = useQuery(FETCH_BOARDS);
   const { data: best } = useQuery(BEST_FETCH_BOARDS);
-  const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
+    useQuery(FETCH_BOARDS_COUNT);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
@@ -63,6 +64,7 @@ export default function BoardListFunction() {
 
   const getDebounce = _.debounce((data) => {
     refetch({ search: data, page: 1 });
+    refetchBoardsCount({ search: data });
     setKeyword(data);
   }, 200);
 
