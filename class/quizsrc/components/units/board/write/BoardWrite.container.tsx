@@ -19,7 +19,7 @@ const CREATE_BOARD = gql`
   }
 `;
 
-export default function BoardWrit() {
+export default function BoardWrite() {
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
   const [password, setPassword] = useState("");

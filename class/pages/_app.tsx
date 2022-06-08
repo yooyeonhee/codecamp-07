@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import { RecoilRoot } from "recoil";
 
 // graphql 환경설정
 // {} command+i 입력 목록 뜸
@@ -19,6 +20,13 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+import { createContext, useState } from "react";
+
+export const GlobalContext = createContext({
+  isEdit: false,
+  setIsEdit: (_: any) => {},
+});
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBXRDHne_8ijDJpY6vWUfAKOPhNaLpN2ps",
@@ -33,6 +41,7 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isEdit, setIsEdit] = useState(false);
   // 업로드, 로그인과 같은 복잡한 서비스 구현은 링크를 따로 만들어 연결해줌.
   const uploadLink = createUploadLink({
     uri: "http://backend07.codebootcamp.co.kr/graphql",
@@ -42,14 +51,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   });
+
   return (
-    // 모든 화면에 적용되도록 제공되는 기능
-    <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      {/* <Layout> */}
-      <Component {...pageProps} />
-      {/* </Layout> */}
-    </ApolloProvider>
+    <RecoilRoot>
+      <GlobalContext.Provider
+        value={{
+          isEdit,
+          setIsEdit,
+        }}
+      >
+        <ApolloProvider client={client}>
+          <Global styles={globalStyles} />
+          {/* <Layout> */}
+          <Component {...pageProps} />
+          {/* </Layout> */}
+        </ApolloProvider>
+      </GlobalContext.Provider>
+    </RecoilRoot>
   );
 }
 
