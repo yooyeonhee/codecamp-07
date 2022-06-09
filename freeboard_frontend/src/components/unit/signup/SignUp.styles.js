@@ -45,3 +45,8 @@ export const LoginButton = styled.button`
   margin: 30px 0px;
   border-radius: 10px;
 `;
+
+export const ErrorBox = styled.div`
+  color: red;
+  margin-left: 10px;
+`;

@@ -7,10 +7,12 @@ export default function LoginUI(props) {
         <S.InputItem
           type="text"
           placeholder="이메일을 입력해주세요."
+          onChange={props.onChangeEmail}
         ></S.InputItem>
         <S.InputItem
           type="password"
           placeholder="비밀번호를 입력해주세요."
+          onChange={props.onChangePassword}
         ></S.InputItem>
         <S.RowWrapper>
           <S.Check type="checkbox" /> 로그인 상태 유지
