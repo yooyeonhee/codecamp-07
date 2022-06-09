@@ -56,3 +56,12 @@
 //                     }, 0)
 //     return week[(days+b-1)%7]
 // }
+
+// const week = ["SUN","MON","TUE","WED","THU","FRI","SAT",]
+
+// function solution(a, b) {
+
+//     const days = new Date(2016, a-1,b).getDay();
+//     return week [days]
+
+// }
