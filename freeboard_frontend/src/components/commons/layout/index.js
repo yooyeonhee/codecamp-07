@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-export default function FreeboardLayout(props) {
+export default function Layout(props) {
   const router = useRouter();
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
   //  console.log(router)

@@ -4,6 +4,7 @@ import BoardDetailFunction from "../../../src/components/unit/board/detail/Board
 import * as S from "../../../src/components/unit/board/comment/BoardCommentWrite/BoardCommentWrite.styles";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { withAuth } from "../../../src/components/commons/hocs/withAuth";
 
 export const FETCH_COMMENTS = gql`
   query fetchBoardComments($boardId: ID!) {
@@ -16,7 +17,7 @@ export const FETCH_COMMENTS = gql`
     }
   }
 `;
-export default function BoardDetailPage() {
+function BoardDetailPage() {
   const router = useRouter();
 
   const { data: commentData } = useQuery(FETCH_COMMENTS, {
@@ -34,3 +35,5 @@ export default function BoardDetailPage() {
     </>
   );
 }
+
+export default withAuth(BoardDetailPage);

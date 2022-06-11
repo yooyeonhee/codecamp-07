@@ -3,7 +3,7 @@ export default function LoginUI(props) {
   return (
     <S.Body>
       <S.Wrapper>
-        <S.Logo>LogIn!</S.Logo>
+        <S.Logo>로그인</S.Logo>
         <S.InputItem
           type="text"
           placeholder="이메일을 입력해주세요."
@@ -17,7 +17,7 @@ export default function LoginUI(props) {
         <S.RowWrapper>
           <S.Check type="checkbox" /> 로그인 상태 유지
         </S.RowWrapper>
-        <S.LoginButton>로그인하기</S.LoginButton>
+        <S.LoginButton onClick={props.onClickLogin}>로그인하기</S.LoginButton>
         <S.FunctionArea>
           <S.FindEmail>이메일 찾기</S.FindEmail>
           <S.FindPassword>비밀번호 찾기</S.FindPassword>

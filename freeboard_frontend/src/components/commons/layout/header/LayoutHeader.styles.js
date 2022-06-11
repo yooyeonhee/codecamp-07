@@ -30,4 +30,5 @@ export const Item = styled.span`
   color: black;
   margin-left: 25px;
   font-size: 18px;
+  cursor: pointer;
 `;

@@ -1,6 +1,7 @@
 import BoardWriteFunction from "../../../../src/components/unit/board/write/BoardWrite.container";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { withAuth } from "../../../../src/components/commons/hocs/withAuth";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -22,7 +23,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function BoardWriteEditPage() {
+function BoardWriteEditPage() {
   const router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD, {
@@ -35,3 +36,4 @@ export default function BoardWriteEditPage() {
     </>
   );
 }
+export default withAuth(BoardWriteEditPage);

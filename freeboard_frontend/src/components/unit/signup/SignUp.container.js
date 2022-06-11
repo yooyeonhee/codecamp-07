@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "./SignUp.quires";
+import { Modal } from "antd";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -59,11 +60,22 @@ export default function SignUp() {
           },
         });
         console.log(result);
+        success();
       } catch (error) {
         console.log(error);
       }
     }
   };
+
+  const success = () => {
+    Modal.success({
+      content: "회원가입이 완료되었습니다.",
+      onOk() {
+        router.push(`/login`);
+      },
+    });
+  };
+
   return (
     <SignUpUI
       onClickToLogin={onClickToLogin}
