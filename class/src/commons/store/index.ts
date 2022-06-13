@@ -1,3 +1,4 @@
+import exp from "constants";
 import { atom } from "recoil";
 
 export const isEditState = atom({
@@ -16,4 +17,9 @@ export const userInfoState = atom({
     email: "",
     name: "",
   },
+});
+
+export const visitedPageState = atom({
+  key: "visitedPageState",
+  default: "/",
 });
