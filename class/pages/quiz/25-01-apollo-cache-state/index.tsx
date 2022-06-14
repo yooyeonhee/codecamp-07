@@ -1,5 +1,6 @@
 import { useQuery, gql, useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
+import { useForm } from "react-hook-form";
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -36,6 +37,7 @@ const MyColumn = styled.div`
 export default function MapBoardPage() {
   const [deleteBoard] = useMutation(DELETE_BOARD);
   const [createBoard] = useMutation(CREATE_BOARD);
+  const { register, handleSubmit } = useForm();
   const { data } = useQuery(FETCH_BOARDS);
 
   const onClickDelete = (boardId: string) => async () => {
@@ -49,7 +51,6 @@ export default function MapBoardPage() {
           fields: {
             fetchBoards: (prev, { readField }) => {
               const deletedId = data.deleteBoard;
-              // el._id로 _id 값에 접근하 할 수 없다. 따라서 readField를 이용해 _id 값을 꺼내온다.
               const filteredPrev = prev.filter(
                 (el: any) => readField("_id", el) !== deletedId
               );
@@ -60,14 +61,14 @@ export default function MapBoardPage() {
       },
     });
   };
-  const onClickSubmit = async () => {
+  const onClickSubmit = async (data) => {
     await createBoard({
       variables: {
         createBoardInput: {
-          writer: "영희",
-          password: "1234",
-          title: "제목입니다.",
-          contents: "내용입니다.",
+          writer: data.writer,
+          password: data.password,
+          title: data.title,
+          contents: data.contents,
         },
       },
       //   refetchQueries[{query: FETCH_BOARDS}]
@@ -84,16 +85,30 @@ export default function MapBoardPage() {
   };
 
   return (
-    <div>
-      {data?.fetchBoards.map((el: any) => (
-        <MyRow key={el._id}>
-          <MyColumn>{el._id}</MyColumn>
-          <MyColumn>{el.writer}</MyColumn>
-          <MyColumn>{el.title}</MyColumn>
-          <button onClick={onClickDelete(el._id)}>삭제하기</button>
-        </MyRow>
-      ))}
-      <button onClick={onClickSubmit}>등록하기</button>
-    </div>
+    <>
+      <div>
+        {data?.fetchBoards.map((el: any) => (
+          <MyRow key={el._id}>
+            <MyColumn>{el._id}</MyColumn>
+            <MyColumn>{el.writer}</MyColumn>
+            <MyColumn>{el.title}</MyColumn>
+            <button onClick={onClickDelete(el._id)}>X</button>
+          </MyRow>
+        ))}
+      </div>
+      <form onSubmit={handleSubmit(onClickSubmit)}>
+        작성자 : <input type="text" {...register("writer")} />
+        <br />
+        비밀번호 :<input type="password" {...register("password")} />
+        <br />
+        제목 : <input type="text" {...register("title")} />
+        <br />
+        내용 : <input type="text" {...register("contents")} />
+        <br />
+        <button style={{ width: "100px", height: "40px" }} type="submit">
+          등록하기
+        </button>
+      </form>
+    </>
   );
 }
