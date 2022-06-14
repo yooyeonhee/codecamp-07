@@ -2,22 +2,22 @@ import styled from "@emotion/styled";
 
 export const Body = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `;
 
-export const Wrapper = styled.div`
-  width: 400px;
-  height: 500px;
-  margin: 40px auto;
+export const Form = styled.form`
+  height: auto;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 20px;
+  margin: 100px auto;
+  padding: 20px 30px;
 `;
-export const Logo = styled.div`
+export const Title = styled.div`
   width: 100%;
-  font-size: 40px;
   text-align: center;
+  font-weight: 700;
+  font-size: 28px;
   margin-bottom: 20px;
 `;
 export const InputItem = styled.input`

@@ -1,52 +1,36 @@
-import { CloseOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Body = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `;
 
-export const BackIcon = styled(CloseOutlined)`
-  position: absolute;
-  top: 50px;
-  right: 70px;
-  font-size: 30px;
-`;
-
-export const Wrapper = styled.div`
-  width: 400px;
-  height: 700px;
-  margin: 40px auto;
+export const Form = styled.form`
+  height: auto;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 20px;
+  margin: 100px auto;
+  padding: 20px 30px;
 `;
+
 export const Title = styled.div`
   width: 100%;
-  font-size: 40px;
   text-align: center;
+  font-weight: 700;
+  font-size: 28px;
   margin-bottom: 20px;
 `;
+
 export const InputTitle = styled.div`
   width: 100%;
-`;
-export const InputItem = styled.input`
-  width: 100%;
-  height: 60px;
-  margin: 10px 0px;
-  border-radius: 10px;
-  padding: 5px 10px;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 10px;
 `;
 
-export const LoginButton = styled.button`
-  width: 100%;
-  height: 60px;
-  margin: 30px 0px;
-  border-radius: 10px;
-`;
-
-export const ErrorBox = styled.div`
+export const Error = styled.div`
   color: red;
+  font-size: 9px;
   margin-left: 10px;
 `;
