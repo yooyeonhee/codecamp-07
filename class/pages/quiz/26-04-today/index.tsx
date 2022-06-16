@@ -21,7 +21,7 @@ export default function TodayPage() {
   const getTime = () => {
     const now = new Date();
     const YYYY = String(now.getFullYear());
-    const MM = String(now.getMonth()).padStart(2, "0");
+    const MM = String(now.getMonth() + 1).padStart(2, "0");
     const DD = String(now.getDay()).padStart(2, "0");
     return `${YYYY}-${MM}-${DD}`;
   };
@@ -34,10 +34,10 @@ export default function TodayPage() {
     // 2. 이미 담겼는지 확인하기
     const temp = todayBaskets.filter((basketEl) => basketEl._id === el._id);
     if (temp.length === 1) {
-      const deleteTodayBasket = todayBaskets.filter(
-        (basketEl) => basketEl._id !== el._id
-      );
-      localStorage.setItem("todayBaskets", JSON.stringify(deleteTodayBasket));
+      // const deleteTodayBasket = todayBaskets.filter(
+      //   (basketEl) => basketEl._id !== el._id
+      // );
+      // localStorage.setItem("todayBaskets", JSON.stringify(deleteTodayBasket));
       return;
     }
 
