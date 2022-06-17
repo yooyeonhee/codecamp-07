@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export const MyRow = styled.div`
   display: flex;
@@ -41,6 +43,12 @@ export const Input = styled.input`
   padding: 5px 10px;
   border: 1px solid #bdbdbd;
   margin-bottom: 40px;
+`;
+
+export const InputQuill = styled(ReactQuill)`
+  width: 100%;
+  height: 300px;
+  margin-bottom: 60px;
 `;
 
 export const Map = styled.div`

@@ -1,4 +1,5 @@
 import Button01 from "../../commons/buttons/buttons01";
+import InputError from "../../commons/inputError";
 import Input from "../../commons/inputs/input01";
 import * as S from "./SignUp.styles";
 
@@ -13,28 +14,33 @@ export default function SignUpUI(props) {
           type="text"
           placeholder="이메일을 입력해주세요."
         />
-        <S.Error>{props.formState.errors.email?.message}</S.Error>
+        <InputError text={props.formState.errors.email?.message}></InputError>
         <S.InputTitle>이름</S.InputTitle>
         <Input
           type="text"
           register={props.register("name")}
           placeholder="이름을 입력해주세요."
         />
-        <S.Error>{props.formState.errors.name?.message}</S.Error>
+        <InputError text={props.formState.errors.name?.message}></InputError>
+        {/* <S.Error>{props.formState.errors.name?.message}</S.Error> */}
         <S.InputTitle>비밀번호</S.InputTitle>
         <Input
           type="password"
           register={props.register("password")}
           placeholder="비밀번호를 입력해주세요."
         />
-        <S.Error>{props.formState.errors.password?.message}</S.Error>
+        <InputError
+          text={props.formState.errors.password?.message}
+        ></InputError>
         <S.InputTitle>비밀번호 확인</S.InputTitle>
         <Input
           type="password"
           register={props.register("passwordConfirm")}
           placeholder="비밀번호를 다시 입력해주세요."
         />
-        <S.Error>{props.formState.errors.passwordConfirm?.message}</S.Error>
+        <InputError
+          text={props.formState.errors.passwordConfirm?.message}
+        ></InputError>
         <Button01
           isActive={props.formState.isValid}
           title="회원가입"

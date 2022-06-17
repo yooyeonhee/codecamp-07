@@ -1,4 +1,5 @@
 import Button01 from "../../commons/buttons/buttons01";
+import InputError from "../../commons/inputError";
 import Input from "../../commons/inputs/input01";
 import * as S from "./Login.styles";
 export default function LoginUI(props) {
@@ -11,11 +12,15 @@ export default function LoginUI(props) {
           type="text"
           placeholder="이메일을 입력해주세요."
         />
+        <InputError text={props.formState.errors.email?.message}></InputError>
         <Input
           register={props.register("password")}
-          type="text"
+          type="password"
           placeholder="비밀번호를 입력해주세요."
         />
+        <InputError
+          text={props.formState.errors.password?.message}
+        ></InputError>
         <S.RowWrapper>
           <S.Check type="checkbox" /> 로그인 상태 유지
         </S.RowWrapper>

@@ -5,8 +5,8 @@ export const UploadFileHidden = styled.input`
 `;
 
 export const UploadButton = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 180px;
+  height: 180px;
   border-radius: 5px;
   margin-right: 10px;
   display: flex;

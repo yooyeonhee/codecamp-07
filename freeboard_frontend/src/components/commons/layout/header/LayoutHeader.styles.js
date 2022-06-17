@@ -32,3 +32,8 @@ export const Item = styled.span`
   font-size: 18px;
   cursor: pointer;
 `;
+
+export const Welcome = styled.span`
+  font-size: 14px;
+  color: black;
+`;

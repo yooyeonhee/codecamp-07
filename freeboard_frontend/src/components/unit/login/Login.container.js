@@ -10,8 +10,11 @@ import { LOGIN_USER } from "./Login.quires";
 import { Modal } from "antd";
 
 const schema = yup.object({
-  email: yup.string().required(),
-  password: yup.string().required(),
+  email: yup
+    .string()
+    .email("이메일 형식이 적합하지 않습니다.")
+    .required("이메일은 필수 입력 사항입니다."),
+  password: yup.string().required("비밀번호는 필수 입력 사항입니다."),
 });
 
 export default function Login() {

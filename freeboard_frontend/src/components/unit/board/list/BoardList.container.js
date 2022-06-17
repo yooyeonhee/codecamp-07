@@ -67,6 +67,7 @@ export default function BoardListFunction() {
     refetchBoardsCount({ search: data });
     setKeyword(data);
   }, 200);
+  console.log(best);
 
   return (
     <BoardListUI

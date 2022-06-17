@@ -28,9 +28,3 @@ export const InputTitle = styled.div`
   font-size: 16px;
   margin-top: 10px;
 `;
-
-export const Error = styled.div`
-  color: red;
-  font-size: 9px;
-  margin-left: 10px;
-`;
