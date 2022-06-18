@@ -21,8 +21,12 @@ export default function ProductWrite(props) {
   const [fileUrls, setFileUrls] = useState([]);
   const [createUsedItem] = useMutation(CREATE_USED_ITEM);
   const [updateUsedItem] = useMutation(UPDATE_USED_ITEM);
+  const [address, setAddress] = useState("");
+  const [lat, setLat] = useState(3.0);
+  const [lng, setLng] = useState(3.0);
+  const [isAddressModalVisible, setIsAddressModalVisible] = useState(false);
 
-  const { register, handleSubmit, setValue, trigger } = useForm({
+  const { register, handleSubmit, setValue, trigger, watch } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
@@ -51,7 +55,24 @@ export default function ProductWrite(props) {
     // onchange 됐다고 react-hook-form에 알려주는 기능
     trigger("contents");
   };
+  console.log(watch());
 
+  const addressShowModal = () => {
+    setIsAddressModalVisible(true);
+  };
+
+  const addressHandleOk = () => {
+    setIsAddressModalVisible(false);
+  };
+
+  const addressHandleCancel = () => {
+    setIsAddressModalVisible(false);
+  };
+
+  const addressHandleComplete = (data) => {
+    setAddress(data.address);
+    setIsAddressModalVisible(false);
+  };
   const onClickSubmit = async (data) => {
     try {
       const result = await createUsedItem({
@@ -61,6 +82,12 @@ export default function ProductWrite(props) {
             remarks: data.remarks,
             contents: data.contents,
             price: data.price,
+            useditemAddress: {
+              address,
+              addressDetail: data.addressDetail,
+              lat,
+              lng,
+            },
             images: fileUrls,
           },
         },
@@ -73,22 +100,34 @@ export default function ProductWrite(props) {
   };
 
   const onClickUpdate = async (data) => {
-    // if (
-    //   !data.name &&
-    //   !data.remarks &&
-    //   !data.contents &&
-    //   !data.price &&
-    //   !fileUrls
-    // ) {
-    //   alert("수정한 내용이 없습니다.");
-    //   return;
-    // }
+    if (
+      !data.name &&
+      !data.remarks &&
+      !data.contents &&
+      !data.price &&
+      !fileUrls &&
+      !address
+    ) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
     const updateUseditemInput = {};
     if (data.name) updateUseditemInput.name = data.name;
     if (data.remarks) updateUseditemInput.remarks = data.remarks;
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = data.price;
     if (fileUrls) updateUseditemInput.images = fileUrls;
+
+    if (address || data.addressDetail) {
+      updateUseditemInput.useditemAddress = {};
+      if (address) {
+        updateUseditemInput.useditemAddress.address = address;
+        updateUseditemInput.useditemAddress.lat = lat;
+        updateUseditemInput.useditemAddress.lng = lng;
+      }
+      if (data.addressDetail)
+        updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
+    }
     try {
       const result = await updateUsedItem({
         variables: {
@@ -97,7 +136,7 @@ export default function ProductWrite(props) {
         },
       });
       // setResultRouteId(result.data.updateUseditemInput._id);
-      router.push(`/market/${result.data.createUseditem._id}`);
+      router.push(`/market/${result.data.updateUseditem._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -113,6 +152,16 @@ export default function ProductWrite(props) {
       handleSubmit={handleSubmit}
       register={register}
       onChangeContents={onChangeContents}
+      isAddressModalVisible={isAddressModalVisible}
+      addressHandleCancel={addressHandleCancel}
+      addressHandleOk={addressHandleOk}
+      addressShowModal={addressShowModal}
+      addressHandleComplete={addressHandleComplete}
+      address={address}
+      setLng={setLng}
+      setLat={setLat}
+      lng={lng}
+      lat={lat}
     />
   );
 }

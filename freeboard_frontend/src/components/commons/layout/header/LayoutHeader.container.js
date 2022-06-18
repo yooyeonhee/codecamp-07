@@ -20,13 +20,13 @@ export default function LayoutHeader() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
-  useEffect(() => {
-    if (accessToken) {
-      setLoginState(true);
-    } else {
-      setLoginState(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     setLoginState(true);
+  //   } else {
+  //     setLoginState(false);
+  //   }
+  // }, []);
 
   const onClickToLogin = () => {
     router.push(`/users/login`);
@@ -44,7 +44,7 @@ export default function LayoutHeader() {
       onClickToSignUp={onClickToSignUp}
       onClickToLogout={onClickToLogout}
       data={data}
-      loginState={loginState}
+      // loginState={loginState}
     />
   );
 }

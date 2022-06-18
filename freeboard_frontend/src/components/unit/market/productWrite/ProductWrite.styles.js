@@ -54,7 +54,6 @@ export const InputQuill = styled(ReactQuill)`
 export const Map = styled.div`
   width: 384px;
   height: 252px;
-  background-color: gray;
 `;
 
 export const GPSItem = styled.div`

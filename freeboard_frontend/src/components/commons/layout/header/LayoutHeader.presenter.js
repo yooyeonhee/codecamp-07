@@ -6,17 +6,20 @@ export default function LayoutHeaderUI(props) {
       <S.NavbarWrapper>
         <S.Navbar>
           <S.NavItem>
-            {props.loginState && (
-              <S.Welcome>
-                {props.data?.fetchUserLoggedIn.name}님 안녕하세요.
-              </S.Welcome>
-            )}
+            <S.Welcome>
+              {props.data?.fetchUserLoggedIn
+                ? `${props.data?.fetchUserLoggedIn.name}님 안녕하세요.`
+                : ""}
+            </S.Welcome>
+
             <S.Item
               onClick={
-                props.loginState ? props.onClickToLogout : props.onClickToLogin
+                props.data?.fetchUserLoggedIn
+                  ? props.onClickToLogout
+                  : props.onClickToLogin
               }
             >
-              {props.loginState ? "LogOut" : "LogIn"}
+              {props.data?.fetchUserLoggedIn ? "LogOut" : "LogIn"}
             </S.Item>
           </S.NavItem>
           <S.NavItem>

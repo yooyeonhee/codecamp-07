@@ -13,7 +13,6 @@ export default function ProductDetailFunction() {
   const { data } = useQuery(FETCH_USED_ITEM, {
     variables: { useditemId: router.query.productId },
   });
-  console.log(data);
 
   const onClickDelete = async () => {
     try {
