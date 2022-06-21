@@ -1,93 +1,85 @@
-// // import Head from "next/head";
-// import { useEffect } from "react";
+import { useQuery, gql } from "@apollo/client";
+import styled from "@emotion/styled";
+import { useState } from "react";
 
-// declare const window: typeof globalThis & {
-//   kakao: any;
-// };
+export const FETCH_USED_ITEMS = gql`
+  query fetchUseditems($search: String, $page: Int, $isSoldout: Boolean) {
+    fetchUseditems(search: $search, page: $page, isSoldout: $isSoldout) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+    }
+  }
+`;
 
-// export default function KakaoMapPage() {
-//   useEffect(() => {
-//     const script = document.createElement("script");
-//     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=387b6d057e55c68fad491f03d9433f43&libraries=services&autoload=false`;
-//     document.head.appendChild(script);
+export default function TodayPage() {
+  const { data } = useQuery(FETCH_USED_ITEMS);
+  const [today, setToday] = useState([]);
 
-//     script.onload = () => {
-//       window.kakao.maps.load(function () {
-//         const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
-//         const options = {
-//           // 지도를 생성할 때 필요한 기본 옵션
-//           center: new window.kakao.maps.LatLng(37.6714, 126.8072), // 지도의 중심좌표.
-//           level: 3, // 지도의 레벨(확대, 축소 정도)
-//         };
-//         const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+  console.log(data);
+  const onClickTody = (el) => () => {
+    const todayBaskets = JSON.parse(
+      sessionStorage.getItem("todayBaskets") || "[]"
+    );
 
-//         const geocoder = new window.kakao.maps.services.Geocoder();
+    // 2. 이미 담겼는지 확인하기
+    const temp = todayBaskets.filter((basketEl) => basketEl._id === el._id);
+    if (temp.length === 1) {
+      // const deleteTodayBasket = todayBaskets.filter(
+      //   (basketEl) => basketEl._id !== el._id
+      // );
+      // localStorage.setItem("todayBaskets", JSON.stringify(deleteTodayBasket));
+      return;
+    }
 
-//         function searchDetailAddrFromCoords(coords, callback) {
-//           // 좌표로 법정동 상세 주소 정보를 요청합니다
-//           geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-//         }
+    const { ...newEl } = el;
+    todayBaskets.push(newEl);
 
-//         geocoder.addressSearch(
-//           "제주특별자치도 제주시 첨단로 242",
-//           function (result, status) {
-//             // 정상적으로 검색이 완료됐으면
-//             if (status === window.kakao.maps.services.Status.OK) {
-//               const coords = new window.kakao.maps.LatLng(
-//                 result[0].y,
-//                 result[0].x
-//               );
+    sessionStorage.setItem("todayBaskets", JSON.stringify(todayBaskets));
+    setToday(todayBaskets);
+  };
+  console.log(today);
 
-//               // 결과값으로 받은 위치를 마커로 표시합니다
-//               const marker = new window.kakao.maps.Marker({
-//                 map: map,
-//                 position: coords,
-//               });
+  return (
+    <>
+      <div>
+        {data?.fetchUseditems.map((el) => (
+          <Row key={el._id} onClick={onClickTody(el)}>
+            <Column>{el._id}</Column>
+            <Column>{el.name}</Column>
+            <Column>{el.remarks}</Column>
+            <Column>{el.price}</Column>
+          </Row>
+        ))}
+      </div>
+      {/* <br></br>
+      <br />
+      <div>오늘 본 목록</div>
+      <div>
+        {data?.fetchBoards.map(
+          (el) =>
+            today.includes(el._id) && (
+              <Row key={el._id} onClick={onClickTody(el)}>
+                <Column>{el._id}</Column>
+                <Column>{el.writer}</Column>
+                <Column>{el.title}</Column>
+              </Row>
+            )
+        )} */}
+      {/* </div> */}
+    </>
+  );
+}
 
-//               window.kakao.maps.event.addListener(
-//                 map,
-//                 "click",
-//                 function (mouseEvent) {
-//                   searchDetailAddrFromCoords(
-//                     mouseEvent.latLng,
-//                     function (result, status) {
-//                       if (status === window.kakao.maps.services.Status.OK) {
-//                         const detailAddr = !!result[0].road_address
-//                           ? console.log(result[0].road_address.address_name)
-//                           : console.log("no");
+const Row = styled.div`
+  display: flex;
+  cursor: pointer;
+`;
 
-//                         // 마커를 클릭한 위치에 표시합니다
-//                         marker.setPosition(mouseEvent.latLng);
-//                         marker.setMap(map);
-//                       }
-//                     }
-//                   );
-//                 }
-//               );
-//               // window.kakao.maps.event.addListener(
-//               //   map,
-//               //   "click",
-//               //   function (mouseEvent) {
-//               //     // 클릭한 위도, 경도 정보를 가져옵니다
-//               //     const latlng = mouseEvent.latLng;
-
-//               //     // 마커 위치를 클릭한 위치로 옮깁니다
-//               //     marker.setPosition(latlng);
-//               //   }
-//               // );
-
-//               // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-//               map.setCenter(coords);
-//             }
-//           }
-//         );
-//       });
-//     };
-//   }, []);
-
-//   return (
-//     <>
-//       <div id="map" style={{ width: 500, height: 400 }}></div>
-//     </>
-//   );
-// }
+const Column = styled.div`
+  width: 20%;
+`;
