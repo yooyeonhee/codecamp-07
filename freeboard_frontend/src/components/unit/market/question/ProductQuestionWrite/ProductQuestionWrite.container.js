@@ -47,39 +47,40 @@ export default function ProductQuestionWriteFunction(props) {
     }
   };
 
-  // const onClickUpdate = async () => {
-  //   props.setIsEdit((prev) => !prev);
-  //   if (!contents) {
-  //     alert("수정한 내용이 없습니다.");
-  //     return;
-  //   }
-  //   if (contents) updateBoardCommentInput.contents = contents;
-  //   if (rate) updateBoardCommentInput.rating = rate;
-  //   const result = await updateBoardComment({
-  //     variables: {
-  //       updateUseditemQuestionInput: {
-  //         contents,
-  //       },
-  //       useditemId: router.query.productId,
-  //     },
-  //     refetchQueries: [
-  //       {
-  //         query: FETCH_USED_ITEM_QUESTIONS,
-  //         variables: {
-  //           useditemId: router.query.productId,
-  //         },
-  //       },
-  //     ],
-  //   });
-  //   props.setAddress("");
-  //   // console.log(props.boardData);
-  // };
+  const onClickUpdate = async () => {
+    props.setIsEdit((prev) => !prev);
+    if (!contents) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+    // if (contents) updateUseditemQuestionInput.contents = contents;
+    const result = await updateQuestion({
+      variables: {
+        updateUseditemQuestionInput: {
+          contents,
+        },
+        useditemQuestionId: props.address,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_USED_ITEM_QUESTIONS,
+          variables: {
+            useditemId: router.query.productId,
+          },
+        },
+      ],
+    });
+    props.setAddress("");
+  };
 
   return (
     <ProductQuestionWriteUI
       onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
       onChangeContents={onChangeContents}
       count={count}
+      isEdit={props.isEdit}
+      el={props.el}
     />
   );
 }

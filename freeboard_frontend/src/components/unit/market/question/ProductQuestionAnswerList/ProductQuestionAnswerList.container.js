@@ -1,63 +1,32 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import {
-  DELETE_USED_ITEM_QUESTIONS,
-  FETCH_USED_ITEM_QUESTIONS,
+  DELETE_USED_ITEM_QUESTIONS_ANSWER,
+  FETCH_USED_ITEM_QUESTIONS_ANSWER,
   FETCH_USER_LOGGED_IN,
-} from "./ProductQuestionList.queries";
+} from "./ProductQuestionAnswerList.queries";
 import { useState } from "react";
-import ProductQuestionListUI from "./ProductQuestionList.presenter";
-import { Modal } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import ProductQuestionAnswerListUI from "./ProductQuestionAnswerList.presenter";
 
-export default function ProductQuestionListFunction() {
+export default function ProductQuestionAnswerListFunction() {
   const router = useRouter();
 
-  const { data, fetchMore } = useQuery(FETCH_USED_ITEM_QUESTIONS, {
+  const { data, fetchMore } = useQuery(FETCH_USED_ITEM_QUESTIONS_ANSWER, {
     variables: { useditemId: router.query.productId },
   });
   const { data: loginData } = useQuery(FETCH_USER_LOGGED_IN);
-  const [deleteQuestion] = useMutation(DELETE_USED_ITEM_QUESTIONS);
-
-  // console.log(loginData?.fetchUserLoggedIn.email);
-  // 댓글 삭제 modal & password
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [checkPassword, setCheckPassword] = useState("");
-  const [questionId, setQuestionId] = useState("");
+  const [deleteQuestionAnswer] = useMutation(DELETE_USED_ITEM_QUESTIONS_ANSWER);
 
   // 댓글 수정
   const [address, setAddress] = useState("");
   const [isEdit, setIsEdit] = useState(false);
-
-  const [isAnswer, setIsAnswer] = useState(false);
-
-  // 삭제 modal
-  const { confirm } = Modal;
-
-  const onClickDeleteIcon = (event) => {
-    setQuestionId(event.target.id);
-    showConfirm();
-  };
-
-  const showConfirm = () => {
-    confirm({
-      title: "댓글을 삭제하시겠습니까?",
-      icon: <ExclamationCircleOutlined />,
-      onOk() {
-        onClickDelete();
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
-  };
 
   // 댓글 삭제 함수
   const onClickDelete = async () => {
     try {
       await deleteQuestion({
         variables: {
-          useditemQuestionId: questionId,
+          useditemId: questionId,
         },
         refetchQueries: [
           {
@@ -76,14 +45,9 @@ export default function ProductQuestionListFunction() {
 
   //  댓글 수정 함수
   const onClickUpdate = async (event) => {
-    // console.log(event.target);
+    console.log(event.target);
     setAddress(event.target.id);
     setIsEdit((prev) => !prev);
-  };
-
-  const onClickAnswer = async (event) => {
-    setAddress(event.target.id);
-    setIsAnswer((prev) => !prev);
   };
 
   //댓글 무한 스크롤
@@ -110,9 +74,11 @@ export default function ProductQuestionListFunction() {
   };
 
   return (
-    <ProductQuestionListUI
+    <ProductQuestionAnswerListUI
       data={data}
       isModalVisible={isModalVisible}
+      onClickDelete={onClickDelete}
+      handleCancel={handleCancel}
       onClickUpdate={onClickUpdate}
       loadFunc={loadFunc}
       address={address}
@@ -120,10 +86,6 @@ export default function ProductQuestionListFunction() {
       isEdit={isEdit}
       setIsEdit={setIsEdit}
       loginData={loginData}
-      onClickAnswer={onClickAnswer}
-      isAnswer={isAnswer}
-      setIsAnswer={setIsAnswer}
-      onClickDeleteIcon={onClickDeleteIcon}
     />
   );
 }

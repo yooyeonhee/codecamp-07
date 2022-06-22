@@ -1,6 +1,7 @@
 import * as S from "./ProductDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 import Dompurify from "dompurify";
+import OutputKakaoMapPage from "../../../commons/outputMap";
 export default function ProductDetailUI(props) {
   return (
     <S.Body>
@@ -34,6 +35,17 @@ export default function ProductDetailUI(props) {
             </S.BoardHeader>
 
             <S.ProductInfo>
+              <S.Pick>
+                <S.PickIcon
+                  src="/detail/pick.png"
+                  onClick={props.onClickPick}
+                />
+                <S.PickCount>
+                  {props.data
+                    ? props.data.fetchUseditem.pickedCount
+                    : "loading"}
+                </S.PickCount>
+              </S.Pick>
               <S.Remarks>
                 {props.data ? props.data.fetchUseditem.remarks : "loading"}
               </S.Remarks>
@@ -66,16 +78,47 @@ export default function ProductDetailUI(props) {
             ) : (
               <S.Contents />
             )}
+
+            <S.ShowMap>
+              {props.data?.fetchUseditem.useditemAddress && (
+                <OutputKakaoMapPage
+                  address={props.data?.fetchUseditem.useditemAddress?.address}
+                />
+              )}
+            </S.ShowMap>
           </S.BoardWrapper>
         </S.Board>
         <S.FunctionButtonArea>
-          <S.ButtonWrapper>
-            <S.FunctionButton>목록으로</S.FunctionButton>
-            <S.FunctionButton onClick={props.onClickMoveToEdit}>
-              수정하기
-            </S.FunctionButton>
-            <S.FunctionButton type="dashed">삭제하기</S.FunctionButton>
-          </S.ButtonWrapper>
+          {props.userData?.fetchUserLoggedIn.email ===
+          props.data?.fetchUseditem.seller.email ? (
+            <S.ButtonWrapper>
+              <S.FunctionButton onClick={props.onClickMoveToList}>
+                목록으로
+              </S.FunctionButton>
+              <S.FunctionButton onClick={props.onClickMoveToEdit}>
+                수정하기
+              </S.FunctionButton>
+              <S.FunctionButton type="dashed" onClick={props.showConfirm}>
+                삭제하기
+              </S.FunctionButton>
+            </S.ButtonWrapper>
+          ) : (
+            <S.ButtonWrapper>
+              <S.FunctionButton onClick={props.onClickMoveToList}>
+                목록으로
+              </S.FunctionButton>
+              <S.FunctionButton
+                onClick={props.showBuyConfirm}
+                disabled={
+                  props.data?.fetchUseditem.soldAt === null ? false : true
+                }
+              >
+                {props.data?.fetchUseditem.soldAt === null
+                  ? "구매하기"
+                  : "판매완료"}
+              </S.FunctionButton>
+            </S.ButtonWrapper>
+          )}
         </S.FunctionButtonArea>
       </S.Wrapper>
     </S.Body>

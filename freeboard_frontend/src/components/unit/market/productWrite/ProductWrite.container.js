@@ -56,7 +56,6 @@ export default function ProductWrite(props) {
     trigger("contents");
   };
   console.log(watch());
-
   const addressShowModal = () => {
     setIsAddressModalVisible(true);
   };

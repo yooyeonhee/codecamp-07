@@ -5,7 +5,7 @@ export default function LayoutNavigationUI(props) {
   const NAVIGATION_MENUS = [
     { name: "market", page: "/market" },
     { name: "boards", page: "/boards" },
-    { name: "myPage", page: "/myPages" },
+    { name: "myPage", page: "/mypage" },
     { name: "myAPI", page: "/myApi" },
   ];
 

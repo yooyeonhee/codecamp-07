@@ -57,7 +57,7 @@ export const Map = styled.div`
 `;
 
 export const GPSItem = styled.div`
-  width: 100px;
+  width: 200px;
   height: 50px;
   border: 1px solid #bdbdbd;
   text-align: center;

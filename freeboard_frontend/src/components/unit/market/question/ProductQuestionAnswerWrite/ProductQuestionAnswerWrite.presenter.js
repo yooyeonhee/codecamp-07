@@ -1,8 +1,9 @@
-import * as S from "./ProductQuestionWrite.styles";
+import * as S from "./ProductQuestionAnswerWrite.styles";
 
-export default function ProductQuestionWriteUI(props) {
+export default function ProductQuestionAnswerWriteUI(props) {
   return (
     <S.CommentWriteArea>
+      <S.Icon src="/detail/arrow.png"></S.Icon>
       <S.CommentInputWrapper>
         <S.CommentInput>
           <S.CommentWrite>
@@ -23,7 +24,8 @@ export default function ProductQuestionWriteUI(props) {
                   props.isEdit ? props.onClickUpdate : props.onClickSubmit
                 }
               >
-                {props.isEdit ? "수정" : "문의"}하기
+                {/* {props.isEdit ? "수정" : "문의"}하기 */}
+                답글등록
               </S.CommentWriteSubmitButton>
             </S.CommentWriteSubmit>
           </S.CommentWrite>

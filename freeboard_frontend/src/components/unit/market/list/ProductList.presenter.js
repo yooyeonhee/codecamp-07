@@ -4,6 +4,10 @@ import * as S from "./ProductList.styles";
 export default function ProductListUI(props) {
   return (
     <S.Body>
+      <S.TodayList>
+        오늘 본 상품
+        <S.TodayItem></S.TodayItem>
+      </S.TodayList>
       <S.Wrapper>
         <S.Title>상품 리스트</S.Title>
         <S.BoxBoards>
@@ -19,8 +23,18 @@ export default function ProductListUI(props) {
         </S.BoxBoards>
         <S.ListOptionArea>
           <S.ListShowOption>
-            <S.Option>판매중상품</S.Option>
-            <S.Option>판매된상품</S.Option>
+            <S.OptionNotSold
+              onClick={props.onClickListNotSoldOut}
+              isSoldout={props.isSoldout}
+            >
+              판매중상품
+            </S.OptionNotSold>
+            <S.OptionSold
+              onClick={props.onClickListSoldOut}
+              isSoldout={props.isSoldout}
+            >
+              판매된상품
+            </S.OptionSold>
           </S.ListShowOption>
           <S.SearchBarWrapper>
             <S.SearchInputBox>
@@ -44,8 +58,14 @@ export default function ProductListUI(props) {
             useWindow={false}
           >
             {props.data?.fetchUseditems.map((el) => (
-              <S.ListItem key={el._id}>
-                <S.ItemImg />
+              <S.ListItem
+                key={el._id}
+                id={el._id}
+                onClick={props.onClickTitleToDetail}
+              >
+                <S.ItemImg
+                // src={`https://storage.googleapis.com/${el.images[0]}`}
+                />
                 <S.ItemInfo>
                   <S.ItemName>{el.name}</S.ItemName>
                   <S.ItemRemarks>{el.remarks}</S.ItemRemarks>

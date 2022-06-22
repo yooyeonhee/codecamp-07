@@ -93,8 +93,24 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
 `;
-
+export const Pick = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 50px;
+  top: 50px;
+`;
+export const PickIcon = styled.img`
+  width: 40px;
+  height: 40px;
+`;
+export const PickCount = styled.div`
+  font-size: 20px;
+`;
 export const Remarks = styled.div`
   font-weight: 500;
   font-size: 18px;
@@ -123,6 +139,12 @@ export const Contents = styled.div`
   width: 100%;
   height: auto;
   min-height: 200px;
+`;
+
+export const ShowMap = styled.div`
+  width: 800px;
+  height: 360px;
+  margin: 0px auto;
 `;
 // 기능 버튼 영역
 export const FunctionButtonArea = styled.div`

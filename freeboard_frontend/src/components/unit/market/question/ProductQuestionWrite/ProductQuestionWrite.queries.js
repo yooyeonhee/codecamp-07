@@ -37,8 +37,6 @@ export const UPDATE_USED_ITEM_QUESTION = gql`
     ) {
       _id
       contents
-      useditem
-      user
       createdAt
     }
   }

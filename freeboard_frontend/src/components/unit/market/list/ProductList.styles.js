@@ -3,11 +3,29 @@ import styled from "@emotion/styled";
 export const Body = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
 `;
 export const Wrapper = styled.div`
   width: 1200px;
   height: 100%;
   margin: 50px auto;
+`;
+export const TodayList = styled.div`
+  width: 13%;
+  height: auto;
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 20px;
+`;
+export const TodayItem = styled.div`
+  width: 10%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
 `;
 export const Title = styled.div`
   width: 100%;
@@ -44,11 +62,19 @@ export const ListShowOption = styled.div`
   justify-content: flex-start;
   align-items: center;
 `;
-export const Option = styled.div`
+export const OptionNotSold = styled.div`
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   margin-right: 30px;
+  border-bottom: ${(props) => (props.isSoldout ? "none" : "2px solid black")};
+`;
+export const OptionSold = styled.div`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  margin-right: 30px;
+  border-bottom: ${(props) => (props.isSoldout ? "2px solid black" : "none")};
 `;
 
 export const SearchBarWrapper = styled.div`
@@ -130,7 +156,7 @@ export const ItemImg = styled.div`
   margin-right: 30px;
 `;
 export const ItemInfo = styled.div`
-  width: 730px;
+  width: 650px;
   height: 160px;
   margin: 0px 20px;
   display: flex;

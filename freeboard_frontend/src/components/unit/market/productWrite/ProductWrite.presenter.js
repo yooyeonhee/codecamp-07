@@ -1,7 +1,7 @@
 import * as S from "./ProductWrite.styles";
 import ProductWriteUpload from "./ProductWriteUpload/ProductWriteUpload.container";
 import "react-quill/dist/quill.snow.css";
-import KakaoMap from "../../../commons/kakaomap";
+import InputKakaoMap from "../../../commons/inputMap";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
 
@@ -44,7 +44,7 @@ export default function ProductWriteUI(props) {
             <S.MyColum>
               <S.InputTitle>거래위치</S.InputTitle>
               <S.Map>
-                <KakaoMap
+                <InputKakaoMap
                   address={props.address}
                   setLng={props.setLng}
                   setLat={props.setLat}

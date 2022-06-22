@@ -7,7 +7,7 @@ const Map = styled.div`
   height: 100%;
   object-fit: cover;
 `;
-export default function KakaoMapPage(props) {
+export default function OutputKakaoMapPage(props) {
   useEffect(() => {
     const script = document.createElement("script");
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=387b6d057e55c68fad491f03d9433f43&libraries=services&autoload=false`;
@@ -31,9 +31,7 @@ export default function KakaoMapPage(props) {
         }
 
         geocoder.addressSearch(
-          props.address === ""
-            ? "제주특별자치도 제주시 첨단로 242"
-            : `${props.address}`,
+          props.address === "" ? "" : `${props.address}`,
           function (result, status) {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
@@ -41,35 +39,11 @@ export default function KakaoMapPage(props) {
                 result[0].y,
                 result[0].x
               );
-              props.setLat(coords.Ma);
-              props.setLng(coords.La);
               // 결과값으로 받은 위치를 마커로 표시합니다
               const marker = new window.kakao.maps.Marker({
                 map: map,
                 position: coords,
               });
-
-              // 선택한 좌표에 대한 주소
-              // window.kakao.maps.event.addListener(
-              //   map,
-              //   "click",
-              //   function (mouseEvent) {
-              //     searchDetailAddrFromCoords(
-              //       mouseEvent.latLng,
-              //       function (result, status) {
-              //         if (status === window.kakao.maps.services.Status.OK) {
-              //           // const detailAddr = !!result[0].road_address
-              //           //   ? console.log(result[0].road_address.address_name)
-              //           //   : console.log("no");
-
-              //           // 마커를 클릭한 위치에 표시합니다
-              //           marker.setPosition(mouseEvent.latLng);
-              //           marker.setMap(map);
-              //         }
-              //       }
-              //     );
-              //   }
-              // );
 
               // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
               map.setCenter(coords);
