@@ -48,6 +48,7 @@ export default function ImageUploadPreviewPage() {
     const results = await Promise.all(
       files.map((el) => el && uploadFile({ variables: { file: el } }))
     );
+    console.log(files);
 
     const resultUrl = results.map((el) => (el ? el.data.uploadFile.url : "")); // ["", url2, ""]
 
