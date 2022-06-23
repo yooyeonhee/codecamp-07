@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import ProductQuestionWriteFunction from "../ProductQuestionWrite/ProductQuestionWrite.container";
 import ProductQuestionAnswerWriteFunction from "../ProductQuestionAnswerWrite/ProductQuestionAnswerWrite.container";
 import ProductQuestionAnswerListFunction from "../ProductQuestionAnswerList/ProductQuestionAnswerList.container";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 export default function ProductQuestionListUI(props) {
   return (
@@ -38,8 +39,20 @@ export default function ProductQuestionListUI(props) {
                             // id={index}
                             id={el._id}
                             src="/detail/delete.png"
-                            onClick={props.onClickDeleteIcon}
+                            onClick={props.showModal}
                           ></S.DeleteIcon>
+                          <Modal
+                            visible={props.isModalVisible}
+                            onOk={props.handleOk}
+                            onCancel={props.handleCancel}
+                          >
+                            <S.DeleteModalWrapper>
+                              <S.DeleteModalIcon />
+                              <S.DeleteModal>
+                                댓글을 삭제하시겠습니까?
+                              </S.DeleteModal>
+                            </S.DeleteModalWrapper>
+                          </Modal>
                         </S.CommentShowOption>
                       ) : (
                         <S.CommentShowOption>
@@ -59,7 +72,9 @@ export default function ProductQuestionListUI(props) {
                 </S.CommentShowWrapper>
               </S.AnswerWrapper>
             )}
-            {props.address === el._id && (
+            <ProductQuestionAnswerListFunction />
+
+            {/* {props.address === el._id && props.isisAnswer && (
               <ProductQuestionWriteFunction
                 isEdit={props.isEdit}
                 setIsEdit={props.setIsEdit}
@@ -67,7 +82,7 @@ export default function ProductQuestionListUI(props) {
                 address={props.address}
                 el={el}
               />
-            )}
+            )} */}
           </S.CommentShow>
         ))}
       </InfiniteScroll>

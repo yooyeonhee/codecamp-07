@@ -31,25 +31,18 @@ export default function ProductQuestionListFunction() {
 
   const [isAnswer, setIsAnswer] = useState(false);
 
-  // 삭제 modal
-  const { confirm } = Modal;
-
-  const onClickDeleteIcon = (event) => {
+  const showModal = (event) => {
+    setIsModalVisible(true);
     setQuestionId(event.target.id);
-    showConfirm();
   };
 
-  const showConfirm = () => {
-    confirm({
-      title: "댓글을 삭제하시겠습니까?",
-      icon: <ExclamationCircleOutlined />,
-      onOk() {
-        onClickDelete();
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
+  const handleOk = () => {
+    setIsModalVisible(false);
+    onClickDelete();
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   // 댓글 삭제 함수
@@ -82,6 +75,7 @@ export default function ProductQuestionListFunction() {
   };
 
   const onClickAnswer = async (event) => {
+    console.log("Asdf");
     setAddress(event.target.id);
     setIsAnswer((prev) => !prev);
   };
@@ -123,7 +117,10 @@ export default function ProductQuestionListFunction() {
       onClickAnswer={onClickAnswer}
       isAnswer={isAnswer}
       setIsAnswer={setIsAnswer}
-      onClickDeleteIcon={onClickDeleteIcon}
+      // onClickDeleteIcon={onClickDeleteIcon}
+      showModal={showModal}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
     />
   );
 }

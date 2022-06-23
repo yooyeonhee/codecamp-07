@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ProductWriteUI from "./ProductWrite.presenter";
 import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./ProductWrite.queries";
@@ -140,6 +140,13 @@ export default function ProductWrite(props) {
       console.log(error);
     }
   };
+  // console.log(props.productData?.fetchUseditem.images);
+  useEffect(() => {
+    if (props.productData?.fetchUseditem.images.length) {
+      setFileUrls([...props.productData?.fetchUseditem.images]);
+    }
+  }, [props.productData]);
+
   return (
     <ProductWriteUI
       isEdit={props.isEdit}

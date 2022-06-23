@@ -76,9 +76,7 @@ export default function ProductQuestionAnswerListFunction() {
   return (
     <ProductQuestionAnswerListUI
       data={data}
-      isModalVisible={isModalVisible}
       onClickDelete={onClickDelete}
-      handleCancel={handleCancel}
       onClickUpdate={onClickUpdate}
       loadFunc={loadFunc}
       address={address}

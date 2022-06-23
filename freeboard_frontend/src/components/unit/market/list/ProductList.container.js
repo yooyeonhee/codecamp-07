@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { BEST_FETCH_USED_ITEMS, FETCH_USED_ITEMS } from "./ProductList.queries";
 import { useRouter } from "next/router";
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function ProductList() {
   const router = useRouter();
   // const [keyword, setKeyword] = useState("");
@@ -19,9 +19,9 @@ export default function ProductList() {
     router.push(`/market/new`);
   };
 
-  const onClickTitleToDetail = (event) => {
-    onClickToday(event.currentTarget);
-    router.push(`/market/${event.currentTarget.id}`);
+  const onClickTitleToDetail = (el) => () => {
+    onClickToday(el);
+    router.push(`/market/${el._id}`);
   };
 
   const onClickListSoldOut = () => {
@@ -39,12 +39,14 @@ export default function ProductList() {
   //   refetch({ search: data, page: 1 });
   //   setKeyword(data);
   // }, 200);
+  useEffect(() => {
+    setToday(JSON.parse(sessionStorage.getItem("todayItems") || "[]"));
+  }, []);
 
   //오늘 본 상품
-  const onClickToday = (el) => () => {
+  const onClickToday = (el) => {
     // 1.기존 장바구니 가져오기
     const todayItems = JSON.parse(sessionStorage.getItem("todayItems") || "[]");
-    console.log(todayItems);
 
     // 2. 이미 담겼는지 확인하기
     const temp = todayItems.filter((todayEl) => todayEl._id === el._id);
@@ -92,6 +94,7 @@ export default function ProductList() {
       onClickListSoldOut={onClickListSoldOut}
       onClickListNotSoldOut={onClickListNotSoldOut}
       isSoldout={isSoldout}
+      today={today}
       // onChangeSearch={onChangeSearch}
     />
   );

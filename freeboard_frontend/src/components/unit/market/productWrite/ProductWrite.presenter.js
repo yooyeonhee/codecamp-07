@@ -107,7 +107,7 @@ export default function ProductWriteUI(props) {
           </S.MyRow>
           <S.InputTitle>사진 첨부</S.InputTitle>
           <S.InputImages>
-            {new Array(2).fill(1).map((data, index) => (
+            {new Array(3).fill(1).map((data, index) => (
               <ProductWriteUpload
                 key={`${data}_${index}`}
                 index={index}

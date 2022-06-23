@@ -6,7 +6,21 @@ export default function ProductListUI(props) {
     <S.Body>
       <S.TodayList>
         오늘 본 상품
-        <S.TodayItem></S.TodayItem>
+        {props.today?.map((el) => (
+          <S.TodayItem id={el._id} onClick={props.onClickTitleToDetail(el)}>
+            {el.images[0] === "" || el.images.length === 0 ? (
+              <S.TodayItemNoImg>대표 이미지 없음</S.TodayItemNoImg>
+            ) : (
+              <S.TodayItemImg
+                src={`https://storage.googleapis.com/${el.images[0]}`}
+              />
+            )}
+            <S.TodayItemName>{el.name}</S.TodayItemName>
+            <S.TodayItemRemarks>{el.remarks}</S.TodayItemRemarks>
+            <S.TodayItemPrice>{el.price}원</S.TodayItemPrice>
+            <S.TodayItemTags>#adfaf #asdfa</S.TodayItemTags>
+          </S.TodayItem>
+        ))}
       </S.TodayList>
       <S.Wrapper>
         <S.Title>상품 리스트</S.Title>
@@ -61,11 +75,15 @@ export default function ProductListUI(props) {
               <S.ListItem
                 key={el._id}
                 id={el._id}
-                onClick={props.onClickTitleToDetail}
+                onClick={props.onClickTitleToDetail(el)}
               >
-                <S.ItemImg
-                // src={`https://storage.googleapis.com/${el.images[0]}`}
-                />
+                {el.images[0] === "" || el.images.length === 0 ? (
+                  <S.ItemNoImg>대표 이미지 없음</S.ItemNoImg>
+                ) : (
+                  <S.ItemImg
+                    src={`https://storage.googleapis.com/${el.images[0]}`}
+                  />
+                )}
                 <S.ItemInfo>
                   <S.ItemName>{el.name}</S.ItemName>
                   <S.ItemRemarks>{el.remarks}</S.ItemRemarks>

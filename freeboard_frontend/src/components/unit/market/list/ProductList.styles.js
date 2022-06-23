@@ -20,13 +20,53 @@ export const TodayList = styled.div`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 20px;
+  padding-top: 10px;
 `;
+
 export const TodayItem = styled.div`
-  width: 10%;
-  height: 20%;
+  width: 150px;
+  height: 230px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px auto;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 `;
+export const TodayItemImg = styled.img`
+  width: 130px;
+  height: 100px;
+  margin: 20px auto;
+`;
+export const TodayItemNoImg = styled.div`
+  width: 130px;
+  height: 100px;
+  margin: 20px auto;
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+export const TodayItemName = styled.div`
+  font-weight: 500;
+  font-size: 12px;
+`;
+export const TodayItemRemarks = styled.div`
+  font-weight: 400;
+  font-size: 12px;
+  color: #4f4f4f;
+`;
+export const TodayItemPrice = styled.div`
+  font-weight: 700;
+  font-size: 16px;
+`;
+export const TodayItemTags = styled.div`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 15px;
+  color: #bdbdbd;
+`;
+
 export const Title = styled.div`
   width: 100%;
   text-align: center;
@@ -149,11 +189,20 @@ export const ListItem = styled.div`
   border-top: 0.5px solid #bdbdbd;
   border-bottom: 0.5px solid #bdbdbd; ;
 `;
-export const ItemImg = styled.div`
+export const ItemImg = styled.img`
   width: 160px;
   height: 160px;
-  background-color: red;
   margin-right: 30px;
+`;
+export const ItemNoImg = styled.div`
+  width: 160px;
+  height: 160px;
+  font-size: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 export const ItemInfo = styled.div`
   width: 650px;

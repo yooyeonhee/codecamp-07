@@ -1,3 +1,4 @@
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { Rate } from "antd";
 
@@ -71,9 +72,22 @@ export const ModifyIcon = styled.img`
   height: 20px;
   margin-right: 10px;
 `;
+export const DeleteModalWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 export const DeleteIcon = styled.img`
   width: 20px;
   height: 20px;
+`;
+export const DeleteModal = styled.div`
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 20px;
+`;
+export const DeleteModalIcon = styled(ExclamationCircleOutlined)`
+  font-size: 20px;
 `;
 export const AnswerIcon = styled.img`
   width: 20x;

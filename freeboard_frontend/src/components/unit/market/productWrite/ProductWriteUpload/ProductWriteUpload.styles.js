@@ -17,7 +17,7 @@ export const UploadButton = styled.div`
 `;
 
 export const UploadImage = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 180px;
+  height: 180px;
   margin-right: 10px;
 `;
