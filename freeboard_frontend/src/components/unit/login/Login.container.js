@@ -39,7 +39,7 @@ export default function Login() {
       const accessToken = result.data.loginUser.accessToken;
       console.log(accessToken);
       setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken);
+      // localStorage.setItem("accessToken", accessToken);
       success();
     } catch (error) {
       console.log(error);
@@ -54,7 +54,7 @@ export default function Login() {
     Modal.success({
       content: "로그인에 성공하였습니다.",
       onOk() {
-        router.push(`/boards`);
+        router.push(`/market`);
       },
     });
   };

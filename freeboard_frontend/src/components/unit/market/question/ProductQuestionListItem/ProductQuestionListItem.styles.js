@@ -1,18 +1,6 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
-import { Rate } from "antd";
 
-export const CommentListArea = styled.div`
-  width: 100%;
-  height: 500px;
-  overflow: auto;
-  background-color: aliceblue;
-`;
-export const CommentItems = styled.div`
-  width: 100%;
-  height: auto;
-  background-color: yellow;
-`;
 export const CommentShow = styled.div`
   margin: 50px auto;
   width: 1400px;

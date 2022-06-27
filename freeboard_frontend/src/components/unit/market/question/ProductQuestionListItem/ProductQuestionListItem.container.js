@@ -1,16 +1,14 @@
+import ProductQuestionListItemUI from "./ProductQuestionListItem.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import {
   DELETE_USED_ITEM_QUESTIONS,
   FETCH_USED_ITEM_QUESTIONS,
   FETCH_USER_LOGGED_IN,
-} from "./ProductQuestionList.queries";
+} from "./ProductQuestionListItem.queries";
 import { useState } from "react";
-import ProductQuestionListUI from "./ProductQuestionList.presenter";
-import { Modal } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-export default function ProductQuestionListFunction() {
+export default function ProductQuestionListFunction(props) {
   const router = useRouter();
 
   const { data, fetchMore } = useQuery(FETCH_USED_ITEM_QUESTIONS, {
@@ -30,7 +28,6 @@ export default function ProductQuestionListFunction() {
   const [isEdit, setIsEdit] = useState(false);
 
   const [isAnswer, setIsAnswer] = useState(false);
-  const [answerAddress, setAnswerAddress] = useState("");
 
   const showModal = (event) => {
     setIsModalVisible(true);
@@ -76,40 +73,16 @@ export default function ProductQuestionListFunction() {
   };
 
   const onClickAnswer = async (event) => {
-    console.log("Asdf");
-    setAddress(event.target.id);
-    setIsAnswer((prev) => !prev);
-  };
-
-  //댓글 무한 스크롤
-  const loadFunc = () => {
-    // 데이터가 있을 떄만 fetchMore 해준다.
-    if (!data) return;
-    fetchMore({
-      variables: {
-        page: Math.ceil(data.fetchUseditemQuestions.length / 10) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchUseditemQuestions)
-          return {
-            fetchUseditemQuestions: [...prev.fetchUseditemQuestions],
-          };
-        return {
-          fetchUseditemQuestions: [
-            ...prev.fetchUseditemQuestions,
-            ...fetchMoreResult.fetchUseditemQuestions,
-          ],
-        };
-      },
-    });
+    // console.log(event.target.id);
+    props.setAnswerAddress(event.target.id);
+    props.setIsAnswer((prev) => !prev);
   };
 
   return (
-    <ProductQuestionListUI
+    <ProductQuestionListItemUI
       data={data}
       isModalVisible={isModalVisible}
       onClickUpdate={onClickUpdate}
-      loadFunc={loadFunc}
       address={address}
       setAddress={setAddress}
       isEdit={isEdit}
@@ -122,8 +95,7 @@ export default function ProductQuestionListFunction() {
       showModal={showModal}
       handleOk={handleOk}
       handleCancel={handleCancel}
-      answerAddress={answerAddress}
-      setAnswerAddress={setAnswerAddress}
+      el={props.el}
     />
   );
 }

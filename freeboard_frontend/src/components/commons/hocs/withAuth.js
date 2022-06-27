@@ -4,6 +4,9 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { getAccessToken } from "../../../commons/libraries/getAccessToken";
+import { accessTokenState } from "../../../commons/store";
 
 //     }
 // }
@@ -17,11 +20,17 @@ export const withAuth = (Component) => (props) => {
       },
     });
   };
+
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
   const router = useRouter();
   useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      info();
-    }
+    getAccessToken().then((newAccessToken) => {
+      if (!newAccessToken) {
+        info();
+      }
+      setAccessToken(newAccessToken);
+    });
   }, []);
 
   return <Component {...props} />;

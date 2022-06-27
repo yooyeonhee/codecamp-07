@@ -3,8 +3,8 @@ import { Rate } from "antd";
 
 export const CommentListArea = styled.div`
   width: 100%;
-  height: 500px;
-  overflow: auto;
+  height: auto;
+  background-color: beige;
 `;
 export const CommentShow = styled.div`
   margin: 50px auto;
@@ -12,6 +12,7 @@ export const CommentShow = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+  background-color: saddlebrown;
 `;
 export const CommentShowWrapper = styled.div`
   width: 100%;
