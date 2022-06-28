@@ -60,13 +60,13 @@
 //     let score = "" // 문자열에 있는 점수 데이터를 저장
 //     let currentScore = 0 // 현재 게임의 점수를 저장
 //     let last = false // 점수를 최종적으로 저장할 시점을 저장
-    
+
 //     return dartResult.split("")
 //             .reduce((acc, cur, i)=>{
 //             if(isNaN(cur)===false){
 //                 score += cur
 //                 last = false // 새로운 게임이 시작되는 시점
-                
+
 //             }else if(isBonus.includes(cur)){
 //                 // 보너스 처리
 //                 score = Number(score)
@@ -95,7 +95,7 @@
 //             acc.push(currentScore)
 //         }
 //         return acc
-    }, []).reduce((acc, cur)=> {
-        return acc+cur
-    })
-}
+//     }, []).reduce((acc, cur)=> {
+//         return acc+cur
+//     })
+// }
