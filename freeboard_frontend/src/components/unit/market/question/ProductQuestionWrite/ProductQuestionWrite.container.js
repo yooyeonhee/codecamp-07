@@ -48,7 +48,7 @@ export default function ProductQuestionWriteFunction(props) {
   };
 
   const onClickUpdate = async () => {
-    props.setIsEdit((prev) => !prev);
+    // props.setIsEdit((prev) => !prev);
     if (!contents) {
       alert("수정한 내용이 없습니다.");
       return;

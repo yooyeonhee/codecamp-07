@@ -45,7 +45,6 @@ export default function ProductDetailFunction() {
       },
     });
   };
-  console.log(data);
 
   const showConfirm = () => {
     confirm({

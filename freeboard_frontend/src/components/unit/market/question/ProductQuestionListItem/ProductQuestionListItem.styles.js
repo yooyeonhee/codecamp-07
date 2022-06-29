@@ -11,7 +11,6 @@ export const CommentShow = styled.div`
 export const AnswerWrapper = styled.div`
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid #bdbdbd;
 `;
 export const CommentShowWrapper = styled.div`
   width: 100%;

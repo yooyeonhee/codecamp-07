@@ -19,7 +19,6 @@ export default function ProductQuestionListFunction() {
   const { data: loginData } = useQuery(FETCH_USER_LOGGED_IN);
   const [deleteQuestion] = useMutation(DELETE_USED_ITEM_QUESTIONS);
 
-  // console.log(loginData?.fetchUserLoggedIn.email);
   // 댓글 삭제 modal & password
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [checkPassword, setCheckPassword] = useState("");
@@ -70,13 +69,11 @@ export default function ProductQuestionListFunction() {
 
   //  댓글 수정 함수
   const onClickUpdate = async (event) => {
-    // console.log(event.target);
     setAddress(event.target.id);
     setIsEdit((prev) => !prev);
   };
 
   const onClickAnswer = async (event) => {
-    console.log("Asdf");
     setAddress(event.target.id);
     setIsAnswer((prev) => !prev);
   };

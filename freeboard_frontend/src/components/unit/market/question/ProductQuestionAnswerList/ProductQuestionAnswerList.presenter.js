@@ -3,6 +3,7 @@ import { getDate } from "../../../../../commons/libraries/utils";
 import { Modal } from "antd";
 import InfiniteScroll from "react-infinite-scroller";
 import ProductQuestionWriteFunction from "../ProductQuestionWrite/ProductQuestionWrite.container";
+import ProductQuestionAnswerWriteFunction from "../ProductQuestionAnswerWrite/ProductQuestionAnswerWrite.container";
 
 export default function ProductQuestionAnswerListUI(props) {
   return (
@@ -35,6 +36,7 @@ export default function ProductQuestionAnswerListUI(props) {
                         // id={index}
                         id={el._id}
                         src="/detail/delete.png"
+                        onClick={props.onClickDelete}
                       ></S.DeleteIcon>
                     </S.CommentShowOption>
                   ) : (
@@ -49,7 +51,7 @@ export default function ProductQuestionAnswerListUI(props) {
             </S.CommentShowWrapper>
           )}
           {props.address === el._id && (
-            <ProductQuestionWriteFunction
+            <ProductQuestionAnswerWriteFunction
               isEdit={props.isEdit}
               setIsEdit={props.setIsEdit}
               setAddress={props.setAddress}

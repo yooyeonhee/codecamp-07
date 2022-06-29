@@ -6,12 +6,11 @@ export const CommentListArea = styled.div`
   width: 100%;
   height: 500px;
   overflow: auto;
-  background-color: aliceblue;
 `;
 export const CommentItems = styled.div`
   width: 100%;
   height: auto;
-  background-color: yellow;
+  border-bottom: 1px solid #bdbdbd;
 `;
 export const CommentShow = styled.div`
   margin: 50px auto;

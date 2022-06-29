@@ -24,8 +24,7 @@ export default function ProductQuestionAnswerWriteUI(props) {
                   props.isEdit ? props.onClickUpdate : props.onClickSubmit
                 }
               >
-                {/* {props.isEdit ? "수정" : "문의"}하기 */}
-                답글등록
+                {props.isEdit ? "수정" : "문의"}하기
               </S.CommentWriteSubmitButton>
             </S.CommentWriteSubmit>
           </S.CommentWrite>
