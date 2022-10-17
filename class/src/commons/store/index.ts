@@ -1,4 +1,3 @@
-import exp from "constants";
 import { atom } from "recoil";
 
 export const isEditState = atom({
@@ -11,6 +10,11 @@ export const accessTokenState = atom({
   default: "",
 });
 
+export const isLoadedState = atom({
+  key: "isLoadedState",
+  default: false,
+});
+// export const restoreAccessTokenLoadable = selector({});
 export const userInfoState = atom({
   key: "userInfoState",
   default: {

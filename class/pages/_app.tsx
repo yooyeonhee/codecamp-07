@@ -12,6 +12,7 @@ import { globalStyles } from "../quizsrc/commons/styles/globalStyles";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import ApolloSetting from "../src/components/commons/apollo";
+import Layout from "../src/components/commons/layout";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

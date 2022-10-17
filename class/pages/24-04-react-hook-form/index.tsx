@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
 export default function ReactHookFromPage() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm();
   const onClickSubmit = (data) => {
     console.log(data);
   };
@@ -11,7 +11,7 @@ export default function ReactHookFromPage() {
       작성자 : <input type="text" {...register("writer")} />
       내용 : <input type="text" {...register("content")} />
       {/* 주소 : <input type="text" {...register("boardAddress.addressDetail")} /> */}
-      <button type="submit">등록하기</button>
+      <button disabled={formState.isSubmitting}>등록하기</button>
     </form>
   );
 }

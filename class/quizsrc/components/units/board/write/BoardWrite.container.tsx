@@ -79,6 +79,7 @@ export default function BoardWrite() {
   const onClickImage = () => {
     fileRef.current?.click();
   };
+  console.log(imageUrl);
   return (
     <BoardWriteUI
       onChangeWriter={onChangeWriter}

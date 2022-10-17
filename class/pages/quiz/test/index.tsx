@@ -1,85 +1,81 @@
-import { useQuery, gql } from "@apollo/client";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const FETCH_USED_ITEMS = gql`
-  query fetchUseditems($search: String, $page: Int, $isSoldout: Boolean) {
-    fetchUseditems(search: $search, page: $page, isSoldout: $isSoldout) {
-      _id
-      name
-      remarks
-      contents
-      price
-      tags
-      images
-    }
-  }
+export const Body = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: #f8f8f8;
+`;
+export const Wrapper = styled.div`
+  width: 450px;
+  height: 550px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+export const Content = styled.div`
+  width: 100%;
+  height: 90%;
+  background-color: aliceblue;
+`;
+export const ChooseClose = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  width: 100%;
+  height: 10%;
+`;
+export const OneDay = styled.div`
+  font-size: 1rem;
+`;
+export const Close = styled.div`
+  font-size: 1rem;
 `;
 
-export default function TodayPage() {
-  const { data } = useQuery(FETCH_USED_ITEMS);
-  const [today, setToday] = useState([]);
-
-  console.log(data);
-  const onClickTody = (el) => () => {
-    const todayBaskets = JSON.parse(
-      sessionStorage.getItem("todayBaskets") || "[]"
-    );
-
-    // 2. 이미 담겼는지 확인하기
-    const temp = todayBaskets.filter((basketEl) => basketEl._id === el._id);
-    if (temp.length === 1) {
-      // const deleteTodayBasket = todayBaskets.filter(
-      //   (basketEl) => basketEl._id !== el._id
-      // );
-      // localStorage.setItem("todayBaskets", JSON.stringify(deleteTodayBasket));
-      return;
+export default function test() {
+  const [showModal, setShowModal] = useState(false);
+  // const [before, setBefore] = useState("");
+  // const [now, setNow] = useState();
+  useEffect(() => {
+    const BEFORE = localStorage.getItem("visitBefore") || "";
+    const NOW = Math.floor(new Date().getDate());
+    console.log(BEFORE);
+    if (BEFORE === "") {
+      setShowModal(true);
+    } else {
+      if (NOW >= Number(BEFORE)) {
+        setShowModal(true);
+        localStorage.removeItem("visitBefore");
+      } else {
+        setShowModal(false);
+      }
     }
-
-    const { ...newEl } = el;
-    todayBaskets.push(newEl);
-
-    sessionStorage.setItem("todayBaskets", JSON.stringify(todayBaskets));
-    setToday(todayBaskets);
+  }, []);
+  const onClickClose = () => {
+    setShowModal(false);
   };
-  console.log(today);
-
+  const onClickTodayClose = () => {
+    const expiry = new Date();
+    const expiryDate: number = expiry.getDate() + 1;
+    // 로컬스토리지 저장
+    localStorage.setItem("visitBefore", String(expiryDate));
+    setShowModal(false);
+  };
   return (
-    <>
-      <div>
-        {data?.fetchUseditems.map((el) => (
-          <Row key={el._id} onClick={onClickTody(el)}>
-            <Column>{el._id}</Column>
-            <Column>{el.name}</Column>
-            <Column>{el.remarks}</Column>
-            <Column>{el.price}</Column>
-          </Row>
-        ))}
-      </div>
-      {/* <br></br>
-      <br />
-      <div>오늘 본 목록</div>
-      <div>
-        {data?.fetchBoards.map(
-          (el) =>
-            today.includes(el._id) && (
-              <Row key={el._id} onClick={onClickTody(el)}>
-                <Column>{el._id}</Column>
-                <Column>{el.writer}</Column>
-                <Column>{el.title}</Column>
-              </Row>
-            )
-        )} */}
-      {/* </div> */}
-    </>
+    <Body>
+      {showModal && (
+        <Wrapper>
+          <Content></Content>
+          <ChooseClose>
+            <OneDay onClick={onClickTodayClose}>하루동안 열지 않기</OneDay>
+            <Close onClick={onClickClose}>닫기</Close>
+          </ChooseClose>
+        </Wrapper>
+      )}
+    </Body>
   );
 }
-
-const Row = styled.div`
-  display: flex;
-  cursor: pointer;
-`;
-
-const Column = styled.div`
-  width: 20%;
-`;

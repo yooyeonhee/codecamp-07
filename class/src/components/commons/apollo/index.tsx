@@ -5,16 +5,18 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import { areArraysEqual } from "@mui/base";
+import { avatarClasses } from "@mui/material";
 import { createUploadLink } from "apollo-upload-client";
 import { GraphQLClient } from "graphql-request";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { getAccessToken } from "../../../commons/libraries/getAccessToken";
-import { accessTokenState } from "../../../commons/store";
+import { accessTokenState, isLoadedState } from "../../../commons/store";
 
 export default function zApolloSetting(props: any) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-
+  // const [isLoaded, setIsLoaded] = useState();
   // const accessToken = localStorage.getItem("accessToken");
 
   // 1. 프리렌더링 예제 - process.browser 방법
@@ -39,10 +41,19 @@ export default function zApolloSetting(props: any) {
     // 1. 기존방식
     // const accessToken = localStorage.getItem("accessToken");
     // setAccessToken(accessToken || "");
-
-    getAccessToken().then((newAccessToken) => {
-      setAccessToken(newAccessToken);
-    });
+    // getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    // });
+    // withAuth- 해결방법 1
+    // getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    // });
+    // withAuth- 해결방법 2
+    // getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    //   setIsLoaded(true);
+    // });
+    // g
   }, []);
 
   // const RESTORE_ACCESS_TOKEN = gql`
@@ -53,7 +64,6 @@ export default function zApolloSetting(props: any) {
   //   }
   // `;
 
-  // operation 실패한 쿼리의 정보들을 가져옴.
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // 1-1. 에러를 캐치
     if (graphQLErrors) {
