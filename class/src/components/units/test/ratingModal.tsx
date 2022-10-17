@@ -1,40 +1,62 @@
 import styled from "@emotion/styled";
-import { Rate } from "antd";
-import Image from "next/image";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
-const Img = styled.img`
-  width: 30px;
-  height: 30px;
-`;
-const customIcons: Record<number, React.ReactNode> = {
-  1: <Img src="/rate/1.svg" />,
-  2: <Img src="/rate/2.svg" />,
-  3: <Img src="/rate/3.svg" />,
-  4: <Img src="/rate/4.svg" />,
-  5: <Img src="/rate/5.svg" />,
-};
-
+interface IProps {
+  select: boolean;
+}
 const RateModal: React.FC<{
   setRate: Dispatch<SetStateAction<number>>;
   rate: number;
-}> = ({ setRate, rate }) => (
-  <>
-    <StyleRate
-      defaultValue={3}
-      character={({ index }: { index: number }) => customIcons[index + 1]}
-      onChange={setRate}
-    />
-  </>
-);
-
-const StyleRate = styled(Rate)`
-  > li {
-    :nth-child(3) {
-      filter: invert(49%) sepia(52%) saturate(3416%) hue-rotate(161deg)
-        brightness(95%) contrast(103%);
+}> = ({ setRate, rate }) => {
+  const rateImg = [
+    `/rate/1.svg`,
+    `/rate/2.svg`,
+    `/rate/3.svg`,
+    `/rate/4.svg`,
+    `/rate/5.svg`,
+  ];
+  const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const handleStarClick = (index: number) => {
+    let clickStates = [...clicked];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] =
+        i === index ? (clickStates[i] === true ? false : true) : false;
     }
-  }
+    setClicked(clickStates);
+    setRate((prev) => (prev === index + 1 ? 0 : index + 1));
+  };
+  return (
+    <>
+      <EmotionRates>
+        {rateImg.map((el, index: number) => {
+          return (
+            <EmotionRate key={index} onClick={() => handleStarClick(index)}>
+              <Img src={el} select={clicked[index]} />
+            </EmotionRate>
+          );
+        })}
+      </EmotionRates>
+    </>
+  );
+};
+const EmotionRates = styled.ul`
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 `;
-
+const EmotionRate = styled.li`
+  list-style: none;
+`;
+const Img = styled.img`
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  filter: ${(props: IProps) =>
+    props.select
+      ? "invert(41%) sepia(84%) saturate(3059%) hue-rotate(167deg) brightness(104%) contrast(102%)"
+      : "none"};
+  transform: ${(props: IProps) => (props.select ? "scale(1.2)" : "none")};
+`;
 export default RateModal;
