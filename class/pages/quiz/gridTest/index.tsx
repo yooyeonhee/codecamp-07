@@ -7,9 +7,7 @@ export default function GridTestPage() {
       <main>
         <Wrapper>
           <Container>
-            {testArr.map((el) => {
-              <Item>{el}</Item>;
-            })}
+            <div>asdfaf</div>
           </Container>
         </Wrapper>
       </main>
@@ -28,5 +26,8 @@ const Container = styled.div`
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(auto-fill, 8px);
   gap: 8px;
+  :nth-child(1) {
+    grid-column: 1/3;
+    grid-row: 1;
+  }
 `;
-const Item = styled.div``;
